@@ -143,7 +143,7 @@ pointsFe = makeResfieldsCSVtxt(BresFe, rho, 'BresFe');
 
 %%%%%%%%%% Combine .txt files %%%%%%%%%%
 totalRoadMapData = combinetxt(pointsFe,pointsCr);
-save('CombinedRoadmap.txt','totalRoadMapData','-ascii');
+writecell(totalRoadMapData, 'CombinedRoadmap.txt');
 %================================%
 
 
@@ -174,6 +174,17 @@ elseif size(x,1) < size(y,1)
     end
     finaltxt = [x,y];
 end
+
+% first two rows are name and units
+names = {};
+units = {};
+for i = 1:size(finaltxt,2)/2
+    names = horzcat(names, {'Magnetic Field', 'Angle'});
+    units = horzcat(units, {'Gauss', 'Degrees'});   
+end
+
+finaltxt = [names; units; num2cell(finaltxt)];
+
 end
 
 % The following function takes resfield and rho data and turns it into a
@@ -197,17 +208,7 @@ for i = 2:desiredBresRows
     resfieldsCSV = [resfieldsCSV Bresdata(:,i)*10 ydata];
 end
 
-% first two rows are name and units
-names = {};
-units = {};
-for i = 1:size(resfieldsCSV,2)/2
-    names = horzcat(names, {'Magnetic Field', 'Angle'});
-    units = horzcat(units, {'milliTesla', 'Degrees'});   
-end
-
-resfieldsCSV = [names; units; num2cell(resfieldsCSV)];
-
-writecell(resfieldsCSV,strcat(filename, 'Roadmap.txt'));
+save(strcat(filename, 'Roadmap.txt'),'resfieldsCSV','-ascii');
 
 end
 %=====================================================================%

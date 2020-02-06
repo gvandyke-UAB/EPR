@@ -1,6 +1,7 @@
 
 clear, clf % clears all variables and figures
-
+ver = version('-release');
+veryear = ver(1:4);
 %%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%% Spin system parameters %%%%%%%%%%
@@ -109,7 +110,7 @@ pointsCr = makeResfieldsCSVtxt(BresCr, rho, 'BresCr');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% At this point, define new Sys, Exp, and Opt parameters %%%%%%%
-%%%%%%% for the following roadmap %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% for another roadmap %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -143,7 +144,15 @@ pointsFe = makeResfieldsCSVtxt(BresFe, rho, 'BresFe');
 
 %%%%%%%%%% Combine .txt files %%%%%%%%%%
 totalRoadMapData = combinetxt(pointsFe,pointsCr);
-writecell(totalRoadMapData, 'CombinedRoadmap.txt');
+if veryear >= 2019
+    writecell(totalRoadMapData, 'CombinedRoadmap.txt'); % the writecell function is only available in 2019 and later
+else
+    file = fopen('CombinedRoadmap.txt','w');
+    for row = 1:2
+        fprintf(file,'%s\n',totalRoadMapData{row,:});
+    end
+    fclose(file);
+end
 %================================%
 
 

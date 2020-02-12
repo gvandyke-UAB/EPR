@@ -142,6 +142,11 @@ pointsFe = makeResfieldsCSVtxt(BresFe, rho, 'BresFe');
 %=================================================%
 
 
+
+% This is supposed to check if your MATLAB version supports the writecell
+% function, which came out in 2019. Development halted because it was taking
+% too long to figure out how to duplicate the results of writecell with
+% commands available before 2019.
 %%%%%%%%%% Combine .txt files %%%%%%%%%%
 totalRoadMapData = combinetxt(pointsFe,pointsCr);
 if veryear >= 2019

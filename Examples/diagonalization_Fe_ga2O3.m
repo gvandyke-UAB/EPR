@@ -39,8 +39,8 @@ clear variables;
  %T2 = b20[sz*sz-1/3*s*(s+1)];
  %T3 = 1/3*b22*[sx*sx-sy*sy];
  %Sixfold
- T2 = (3*2213)*(sz1-(1/3)*s1);%b20/cm-1 = 0.2213 (cm-1*3 *10^4 in MHz) 
- T3 = (1/3)*(3*2091)*(sx1-sy1);% b22/cm-1 = 0.2091 Bushcher and lehmann
+ %T2 = (3*2213)*(sz1-(1/3)*s1);%b20/cm-1 = 0.2213 (cm-1*3 *10^4 in MHz) 
+ %T3 = (1/3)*(3*2091)*(sx1-sy1);% b22/cm-1 = 0.2091 Bushcher and lehmann
  
 %fourfold
  %T2 = (3*1570)*(sz1-(1/3)*s1);%b20/cm-1 = 0.1336 (cm-1*3 in MHz) D = 3b20 and E =b22
@@ -67,7 +67,7 @@ clear variables;
         
     %T1 = u0*g*B0(i)*(cos(theta)*sz-0.9921*sin(theta)*sx+0.1237*sin(theta)*sy);%fourfold
     
-     H = -(T1+T2+T3);
+     H = -(T1);
      [V,D]= eig(H,'vector');
      eigenval(:,i) = D;% ith column of eigenval
      eigenvecs(:,:,i) = V;%ith page of three dimensional array

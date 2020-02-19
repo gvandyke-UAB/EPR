@@ -77,20 +77,24 @@ for i = 1:length(B_0)
    
     %term1 = u_0*g*B_0(i)*((0.0443*sin(theta) + 0.978*cos(theta))*S_z+(0.2083*sin(theta)-0.208*cos(theta))*S_x...
       % -0.977*sin(theta)*S_y); % Sixfold w/ m=0 in ab plane
-        
+     
     %term1 = u_0*g*B_0(i)*(cos(theta)*S_z - 0.9921*sin(theta)*S_x + 0.1237*sin(theta)*S_y); % fourfold
     
     H = -(term1 + term2 + term3);
-    [V,D]= eig(H,'vector');
-    eigenval(:,i) = D; % ith column of eigenval
-    eigenvecs(:,:,i) = V; % ith page of three dimensional array
+    
+    [V,D] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
+    
+    eigenvals(:,i) = D; % each individual D is the ith column of eigenval
+    eigenvecs(:,:,i) = V; % each individual V is the ith item in eigenvecs               
+    % eigenvecs is not used, but nice to have for reference
+    % basis is |s,m>
 end
 
-eigenvals = [transpose(B_0),transpose(eigenval)];
+eigenvals_vs_BField_data = [transpose(B_0),transpose(eigenvals)];
 
-plot(B_0,eigenvals(:,2),B_0,eigenvals(:,3),B_0,eigenvals(:,4),B_0,eigenvals(:,5)...
-    ,B_0,eigenvals(:,6),B_0,eigenvals(:,7));
-
+plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4),B_0,eigenvals_vs_BField_data(:,5)...
+    ,B_0,eigenvals_vs_BField_data(:,6),B_0,eigenvals_vs_BField_data(:,7));
+    % plots each column of data separately
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

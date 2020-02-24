@@ -21,7 +21,7 @@ S_x = [0 sqrt(5)/2 0 0 0 0;...
        0 0 0 0 sqrt(5)/2 0];
 
      
-S_y = [1/2]*[0 -i*sqrt(5) 0 0 0 0;...
+S_y = (1/2)*[0 -i*sqrt(5) 0 0 0 0;...
        i*sqrt(5) 0 -2*i*sqrt(2) 0 0 0;...
        0 2*i*sqrt(2) 0 -3*i 0 0;...
        0 0 3*i 0 -2*i*sqrt(2) 0;...
@@ -66,7 +66,7 @@ term3 = (1/3)*(3*2091)*(S_xx - S_yy); % b22/cm^-1 = 0.2091 Bushcher and Lehmann
 
 B_0 = linspace(0,1000,10001); % static magnetic field
 g = 2.0043;
-theta = 90 * pi/180; % theta = pi/2 is B_0 perp. to b, theta = 0 is B_0 parallel to b
+theta = 0 * pi/180; % theta = pi/2 is B_0 perp. to b, theta = 0 is B_0 parallel to b
 u_0 = 13.996; % Bohr magneton-MHz/mT
  
 for i = 1:length(B_0)
@@ -80,7 +80,7 @@ for i = 1:length(B_0)
      
     %term1 = u_0*g*B_0(i)*(cos(theta)*S_z - 0.9921*sin(theta)*S_x + 0.1237*sin(theta)*S_y); % fourfold
     
-    H = -(term1 + term2 + term3);
+    H = -(term1 + term2 + term3); % still unclear why "-" sign is necessary
     
     [V,D] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
     

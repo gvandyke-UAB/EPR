@@ -2,23 +2,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Octahedral
 
-% clear variables;
+clear Sys;
+clear Exp;
+clear Opt;
 
 % Generate rotations about nL
 nL = [1;0;0]; % rotating about mW magnetic field
 
 cori0 = [0 102 0]; % crystal orientation
 
-rho = (0)*pi/180; % 90 deg is 0 deg in our expt ie B//b
+rho = (90)*pi/180; % 90 deg is 0 deg in our experimental setup i.e. B//b
 
 %%%%%%%%%% Spin system parameters %%%%%%%%%%
 Sys.S = 5/2;
 Sys.g = 2.0043;
 Sys.lwpp = 1.6;
-%Sys.D = [2210*3 2190];% Fits 0 deg data better with these parameters
-%Sys.D = [2213*3 2091];% Buscher and Lehmann
-Sys.B2 = [2091 0 2213 0 0];%
-%Sys.B2 = [-2060 0 -2100 0 0];%
+%Sys.D = [2210*3 2190]; % Fits 0 deg data better with these parameters
+%Sys.D = [2213*3 2091]; % Buscher and Lehmann
+Sys.B2 = [2091 0 2213 0 0];
+%Sys.B2 = [-2060 0 -2100 0 0];
 %================================%
 
 
@@ -44,20 +46,26 @@ Freq = 9.4066;
 
 levelsplot(Sys,Ori,FieldRange,Freq,Exp);
 
+
 % get eigenvalues and eigenvectors to compare with our own script
 % "EasySpinReplication.m"
-
 %{
-for i = 1:10000
-    B_0 = [i-1 ,0 ,0]; % static magnetic field
+for i = 1:10001
     
-    H = sham(Sys,B_0);
+    B_0 = [0 ,0 ,i-1]; % static magnetic field
     
-    [V,D] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
+    H = sham(Sys, B_0);
     
-    eigenvals(:,i) = D; % each individual D is the ith column of eigenval
-    eigenvecsEasySpin(:,:,i) = V; % each individual V is the ith item in eigenvecs 
+    [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, E is column of eigenvalues
+    
+    eigenvalsEasySpin(:,i) = E.'/1e3; % each individual D is the ith column of eigenvalEasySpin
+    eigenvecsEasySpin(:,:,i) = V; % each individual V is the ith item in eigenvecsEasySpin
     
 end
-
 %}
+B_0 = [0 ,0 ,0]; % static magnetic field
+    
+H = sham(Sys, B_0);
+    
+[V,E] = eig(H,'vector') % V is matrix of eigenvectors, E is column of eigenvalues
+

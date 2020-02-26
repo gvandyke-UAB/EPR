@@ -64,9 +64,9 @@ term3 = (1/3)*(3*2091)*(S_xx - S_yy); % b22/cm^-1 = 0.2091 Bushcher and Lehmann
 %term2 = (3*1570)*(S_zz - (1/3)*S_sq); % b20/cm^-1 = 0.1336 (cm^-1*3 in MHz) D = 3b20 and E = b22
 %term3 = (1/3)*(3*1336)*(S_xx - S_yy); % b22/cm^-1 = 0.1576 Bushcher and Lehmann
 
-B_0 = linspace(0,1000,10001); % static magnetic field
+B_0 = linspace(0,1000,1001); % static magnetic field
 g = 2.0043;
-theta = 0 * pi/180; % theta = pi/2 is B_0 perp. to b, theta = 0 is B_0 parallel to b
+theta = 90 * pi/180; % theta = pi/2 is B_0 perp. to b, theta = 0 is B_0 parallel to b
 u_0 = 13.996; % Bohr magneton-MHz/mT
  
 for i = 1:length(B_0)

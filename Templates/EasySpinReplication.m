@@ -64,7 +64,7 @@ term3 = (1/3)*(3*2091)*(S_xx - S_yy); % b22/cm^-1 = 0.2091 Bushcher and Lehmann
 %term2 = (3*1570)*(S_zz - (1/3)*S_sq); % b20/cm^-1 = 0.1336 (cm^-1*3 in MHz) D = 3b20 and E = b22
 %term3 = (1/3)*(3*1336)*(S_xx - S_yy); % b22/cm^-1 = 0.1576 Bushcher and Lehmann
 
-B_0 = linspace(0,1000,1001); % static magnetic field
+B_0 = linspace(0,1000,1001); % static magnetic field in mT
 g = 2.0043;
 theta = 90 * pi/180; % theta = pi/2 is B_0 perp. to b, theta = 0 is B_0 parallel to b
 u_0 = 13.996; % Bohr magneton-MHz/mT
@@ -72,18 +72,10 @@ u_0 = 13.996; % Bohr magneton-MHz/mT
 for i = 1:length(B_0)
    
     term1 = u_0*g*B_0(i)*S_z; % sixfold
-    
-    %term1 = u_0*g*B_0(i)*(cos(theta)*S_z + 0.213*sin(theta)*S_x - 0.9770*sin(theta)*S_y); % sixfold
    
-    %term1 = u_0*g*B_0(i)*((0.0443*sin(theta) + 0.978*cos(theta))*S_z+(0.2083*sin(theta)-0.208*cos(theta))*S_x...
-      % -0.977*sin(theta)*S_y); % Sixfold w/ m=0 in ab plane
-     
-    %term1 = u_0*g*B_0(i)*(cos(theta)*S_z - 0.9921*sin(theta)*S_x + 0.1237*sin(theta)*S_y); % fourfold
-   
-    
     H = term1 + term2 + term3;
     
-    [V,D] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
+    [V,D] = eig(H); % V is matrix of eigenvectors, D is column of eigenvalues
     
     eigenvals(:,i) = D; % each individual D is the ith column of eigenval
     eigenvecs(:,:,i) = V; % each individual V is the ith item in eigenvecs               
@@ -101,6 +93,3 @@ plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eig
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Note: Fourfold--at 90 deg in diagonalization and 0 deg in EasySpin, the 
 % energy level diagram looks similar!!!
-
-% with "-" sign in Hamiltonian, 0 deg in diag. is similar to 90 deg in 
-% EasySpin for both sixfold and fourfld.

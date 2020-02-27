@@ -71,7 +71,7 @@ u_0 = 13.996; % Bohr magneton-MHz/mT
  
 for i = 1:length(B_0)
    
-    term1 = u_0*g*B_0(i)*(cos(theta)*S_z + 0.4115*sin(theta)*S_x - 0.9112*sin(theta)*S_y); % sixfold
+    term1 = u_0*g*B_0(i)*S_z; % sixfold
     
     %term1 = u_0*g*B_0(i)*(cos(theta)*S_z + 0.213*sin(theta)*S_x - 0.9770*sin(theta)*S_y); % sixfold
    
@@ -80,7 +80,7 @@ for i = 1:length(B_0)
      
     %term1 = u_0*g*B_0(i)*(cos(theta)*S_z - 0.9921*sin(theta)*S_x + 0.1237*sin(theta)*S_y); % fourfold
     
-    H = -(term1 + term2 + term3); % still unclear why "-" sign is necessary
+    H = term1 + term2 + term3;
     
     [V,D] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
     

@@ -43,12 +43,12 @@ S_sq = s*(s+1) * eye(6);
 %%%%%%%%%%%%%%%%%%%%%%%%%% Hamiltonian Info %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Spin Hamiltonian from R. Büscher and G. Lehmann, Z. Naturforsch. 42a, 67-71 (1987);
  
-% H = u*B_0*g*S + b20[S_zz - 1/3*s*(s+1)] + 1/3*b22*[S_xx - S_yy]
+% H = u_B*B_0*g*S + b20[S_zz - 1/3*s*(s+1)] + 1/3*b22*[S_xx - S_yy]
  
 % The first term in H, 'term1' below is calculated using direction cosines in R. Büscher and G. Lehmann
 % and the first term of equation [13] in Dieter Slebert and Juergen Dahlem, Anal. Chem. 1994, 66, 2640-2646
 
-% u = Bohr magneton
+% u_B = Bohr magneton
 % g = isotropic g-value
 % S = spin operator matrix
 % b20 = ZFS (D)
@@ -68,7 +68,7 @@ B_0 = linspace(0,1000,1001); % static magnetic field
 g = 2.0043;
 theta = 90 * pi/180; % theta = pi/2 is B_0 perp. to b, theta = 0 is B_0 parallel to b
 u_0 = 13.996; % Bohr magneton-MHz/mT
- 
+
 for i = 1:length(B_0)
    
     term1 = u_0*g*B_0(i)*S_z; % sixfold
@@ -79,6 +79,7 @@ for i = 1:length(B_0)
       % -0.977*sin(theta)*S_y); % Sixfold w/ m=0 in ab plane
      
     %term1 = u_0*g*B_0(i)*(cos(theta)*S_z - 0.9921*sin(theta)*S_x + 0.1237*sin(theta)*S_y); % fourfold
+   
     
     H = term1 + term2 + term3;
     

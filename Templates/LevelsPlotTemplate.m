@@ -30,7 +30,7 @@ Exp.mwFreq = 9.4066; % 1.4 mT (14 G) modulation amplitude, peak-to-peak
 Exp.Range = [0 1000]; % mT
 Exp.CrystalSymmetry = 'C2/m'; % assumes 'b' is yC
 Exp.nPoints = 1e5;
-Exp.CrystalOrientation = rotatecrystal(cori0,nL,rho);
+%Exp.CrystalOrientation = rotatecrystal(cori0,nL,rho);
 %================================%
 
 
@@ -40,7 +40,7 @@ Exp.CrystalOrientation = rotatecrystal(cori0,nL,rho);
 %================================%
 
 
-Ori = rotatecrystal(cori0,nL,rho);
+%Ori = rotatecrystal(cori0,nL,rho);
 FieldRange = [0 1000];
 Freq = 9.4066;
 
@@ -53,13 +53,16 @@ levelsplot(Sys,'z',FieldRange,Freq,Exp);
 
 for i = 1:10001
     
-    B_0 = [0 ,0 ,i-1]; % static magnetic field
+    B_0 = [0, 0, i-1]; % static magnetic field
     
-    H = sham(Sys, B_0);
+    H1 = zeeman(Sys, B_0);
+    H2 = zfield(Sys);
+ 
+    H = H1 + H2; % matches our hamiltonian perfectly
     
     [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, E is column of eigenvalues
     
-    eigenvalsEasySpin(:,i) = E.'/1e3; % each individual D is the ith column of eigenvalEasySpin
+    eigenvalsEasySpin(:,i) = E; % each individual D is the ith column of eigenvalEasySpin
     eigenvecsEasySpin(:,:,i) = V; % each individual V is the ith item in eigenvecsEasySpin
     
 end

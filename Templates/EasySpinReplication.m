@@ -75,7 +75,7 @@ for i = 1:length(B_0)
    
     H = term1 + term2 + term3;
     
-    [V,D] = eig(H); % V is matrix of eigenvectors, D is column of eigenvalues
+    [V,D] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
     
     eigenvals(:,i) = D; % each individual D is the ith column of eigenval
     eigenvecs(:,:,i) = V; % each individual V is the ith item in eigenvecs               

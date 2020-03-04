@@ -41,7 +41,7 @@ for i = 1:1001
     
     H = H1 + H2; % matches our hamiltonian perfectly
    
-    [V,E] = eig(H); % V is matrix of eigenvectors, E is column of eigenvalues
+    [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, E is column of eigenvalues
     
     eigenvalsEasySpin(:,i) = E; % each individual D is the ith column of eigenvalEasySpin
     eigenvecsEasySpin(:,:,i) = V; % each individual V is the ith item in eigenvecsEasySpin

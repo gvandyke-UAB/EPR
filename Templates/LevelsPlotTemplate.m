@@ -8,8 +8,7 @@ clear Opt;
 
 
 %%%%%%%%%% Spin system parameters %%%%%%%%%%
-Sys.S = 5/2;
-Sys.g = 2.0043;
+Sys.S = 1/2;
 Sys.lwpp = 1.6;
 Sys.D = [2213*3 2091]; % Buscher and Lehmann
 %================================%

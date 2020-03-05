@@ -1,7 +1,10 @@
+
 clear B_0;
 clear g;
 clear theta;
 clear H;
+clear eigenvals;
+clear eigenvecs;
 
 %%%%%%%%%%%% Diagonalization of Spin Hamiltonian %%%%%%%%%%%%
 
@@ -27,7 +30,7 @@ S_zz = S_z * S_z;
 s = 1/2;
 
 % Matrix of S^2 eigenvalue
-S_sq = s*(s+1) * eye(2);
+S_sq = s*(s+1) * eye(2*s + 1);
 
 
 B_0 = linspace(0,1000,1001); % static magnetic field in mT
@@ -40,9 +43,9 @@ for i = 1:length(B_0)
    
     H = term1;
     
-    [V,D] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
+    [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
     
-    eigenvals(:,i) = D/1000; % each individual D is the ith column of eigenval
+    eigenvals(:,i) = E/1000; % each individual D is the ith column of eigenval
     eigenvecs(:,:,i) = V; % each individual V is the ith item in eigenvecs               
     % eigenvecs is not used, but nice to have for reference
     % basis is |s,m>

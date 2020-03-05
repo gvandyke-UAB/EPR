@@ -1,24 +1,21 @@
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%%%%%%%
-% Octahedral
-
 clear Sys;
 clear Exp;
 clear Opt;
 clear H;
+clear B_0;
+clear eigenvalsEasySpin;
+clear eigenvecsEasySpin;
 
 
 %%%%%%%%%% Spin system parameters %%%%%%%%%%
-Sys.S = 1/2;
+Sys.S = 1;
 Sys.lwpp = 1.6;
 %================================%
 
 
 %%%%%%%%%% Experimental parameters %%%%%%%%%%
 Exp.Temperature = 300; 
-Exp.mwFreq = 9.4066; % 1.4 mT (14 G) modulation amplitude, peak-to-peak
-Exp.Range = [0 1000]; % mT
-Exp.CrystalSymmetry = 'C2/m'; % assumes 'b' is yC
 Exp.nPoints = 1e5;
 %================================%
 
@@ -43,5 +40,3 @@ for i = 1:1001
     eigenvecsEasySpin(:,:,i) = V; % each individual V is the ith item in eigenvecsEasySpin
     
 end
-
-hold;

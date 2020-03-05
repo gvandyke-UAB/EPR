@@ -35,7 +35,7 @@ clear variables;
  sx1 = sx*sx;
  sy1 = sy*sy;
  s = 5/2;
- s1 = s*(s+1)*eye(6);
+ s1 = s*(s+1)*eye(2*s + 1);
  %T2 = b20[sz*sz-1/3*s*(s+1)];
  %T3 = 1/3*b22*[sx*sx-sy*sy];
  %Sixfold

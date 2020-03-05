@@ -37,7 +37,7 @@ S_zz = S_z * S_z;
 s = 5/2;
 
 % Matrix of S^2 eigenvalue
-S_sq = s*(s+1) * eye(6);
+S_sq = s*(s+1) * eye(2*s + 1);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Hamiltonian Info %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

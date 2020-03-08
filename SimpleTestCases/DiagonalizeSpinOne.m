@@ -1,4 +1,9 @@
 
+%%%%%%%%%%%% IMPORTANT %%%%%%%%%%%%
+% The MatLab eig() function returns eigenvalues in ascending order,
+% therefore it looks like traces never cross if you zoom in enough. They do
+% in fact cross, it just looks like the traces bounce off each other.
+
 clear B_0;
 clear g;
 clear theta;
@@ -14,7 +19,7 @@ S_z = [1 0 0;...
        0 0 0;...
        0 0 -1];
        
- 
+
 S_x = [0 1/sqrt(2) 0;...
        1/sqrt(2) 0 1/sqrt(2);...
        0 1/sqrt(2) 0];
@@ -28,7 +33,7 @@ S_y = [0 1/(sqrt(2)*i) 0;...
 S_xx = S_x * S_x;
 S_yy = S_y * S_y;
 S_zz = S_z * S_z;
-   
+
 % Spin number
 s = 1;
 
@@ -41,9 +46,9 @@ u_0 = 13.996; % Bohr magneton-MHz/mT
 g = 2.002319;
 
 for i = 1:length(B_0)
-   
+    
     term1 = g*u_0*B_0(i)*S_z;
-   
+    
     H = term1;
     
     [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues

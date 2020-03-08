@@ -35,7 +35,7 @@ for i = 1:1001
     B_0 = [0, 0, i-1]; % static magnetic field in mT
     
     H = zeeman(Sys, B_0);
-
+    
     [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, E is column of eigenvalues
     
     eigenvalsEasySpin(:,i) = E; % each individual D is the ith column of eigenvalEasySpin

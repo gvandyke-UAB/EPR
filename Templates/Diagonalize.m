@@ -1,3 +1,9 @@
+
+%%%%%%%%%%%% IMPORTANT %%%%%%%%%%%%
+% The MatLab eig() function returns eigenvalues in ascending order,
+% therefore it looks like traces never cross if you zoom in enough. They do
+% in fact cross, it just looks like the traces bounce off each other.
+
 clear variables;
 
 %%%%%%%%%%%% Diagonalization of Spin Hamiltonian %%%%%%%%%%%%

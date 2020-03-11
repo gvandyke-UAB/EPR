@@ -30,7 +30,7 @@ levelsplot(Sys,'z',FieldRange,Freq,Exp);
 
 
 % get eigenvalues and eigenvectors to compare with our own script
-% "EasySpinReplication.m"
+% "Diagonalize.m"
 for i = 1:1001
     
     B_0 = [0, 0, i-1]; % static magnetic field in mT

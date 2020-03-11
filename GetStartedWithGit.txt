@@ -17,6 +17,7 @@ Basics of Git:
 
 -Your computer now believes it is the repo that you got from the GitHub website
 -You control when and what updates occur, unlike a cloud system where updates are instant
--If you want to "update" your repo on your machine, which is like "re-copying" from the 	main repo on the website, use 'git pull'
--If you want to publish your changes to the website, stage your changes for commitment 		with 'git add .', then 'git commit -m "summary of what you did"', then 'git push'.
--If you're not comfortable with the terminal commands, you can use the "Git GUI here" 		option instead
+-If you want to "update" your repo on your machine, which is like "re-copying" from the main repo on the website, use 'git pull'
+-If you want to publish your changes to the website, stage your changes for commitment with 'git add .', then 'git commit -m "summary of what you did"', then 'git push'.
+-If you're not comfortable with the terminal commands, you can use the "Git GUI here" option instead
+	-You might notice there is no 'git pull' button on the GUI. You can add it by going to "Tools" menu, select "Add", name it "Pull" or whatever you want, type "git pull" in the command box, save. You can access the button in the "Tools" menu now.

@@ -10,6 +10,7 @@ clear theta;
 clear H;
 clear eigenvals;
 clear eigenvecs;
+clear i;
 
 %%%%%%%%%%%% Diagonalization of Spin Hamiltonian %%%%%%%%%%%%
 
@@ -24,10 +25,10 @@ S_x = [0 1/sqrt(2) 0;...
        1/sqrt(2) 0 1/sqrt(2);...
        0 1/sqrt(2) 0];
 
-     
-S_y = [0 1/(sqrt(2)*i) 0;...
-       1/(sqrt(2)*i) 0 1/(sqrt(2)*i);...
-       0 1/(sqrt(2)*i) 0];
+
+S_y = [0 i/sqrt(2) 0;...
+       i/sqrt(2) 0 i/sqrt(2);...
+       0 i/sqrt(2) 0];
  
 % Spin operators squared
 S_xx = S_x * S_x;
@@ -52,10 +53,10 @@ for i = 1:length(B_0)
     term3 = (1/3)*(3*2091)*(S_xx - S_yy); % b22/cm^-1 = 0.2091 Bushcher and Lehmann
     
     H = term1 + term2 + term3;
-    
+    term2 + term3
     [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
     
-    eigenvals(:,:,i) = E/1000; % each individual E is the ith item in eigenval
+    eigenvals(:,i) = E/1000; % each individual E is the ith item in eigenval
     eigenvecs(:,:,i) = V; % each individual V is the ith item in eigenvecs               
     % eigenvecs is not used, but nice to have for reference
     % basis is |s,m>

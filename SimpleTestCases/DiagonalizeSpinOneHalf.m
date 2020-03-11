@@ -23,8 +23,8 @@ S_x = [0 1/2;...
        1/2 0];
 
      
-S_y = [0 1/2i;...
-       -1/2i 0];
+S_y = [0 i/2;...
+       -i/2 0];
  
 % Spin operators squared
 S_xx = S_x * S_x;

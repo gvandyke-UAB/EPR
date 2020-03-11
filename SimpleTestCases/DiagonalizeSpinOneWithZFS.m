@@ -56,7 +56,7 @@ for i = 1:length(B_0)
     term2 + term3
     [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, D is column of eigenvalues
     
-    eigenvals(:,i) = E/1000; % each individual E is the ith item in eigenval
+    eigenvals(:,i) = E/1000; % each individual E is the ith column in eigenval
     eigenvecs(:,:,i) = V; % each individual V is the ith item in eigenvecs               
     % eigenvecs is not used, but nice to have for reference
     % basis is |s,m>

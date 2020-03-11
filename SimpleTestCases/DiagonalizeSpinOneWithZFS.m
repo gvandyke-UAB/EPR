@@ -53,9 +53,9 @@ for i = 1:length(B_0)
     
     H = term1 + term2 + term3;
     
-    [V,E] = eig(H); % V is matrix of eigenvectors, D is column of eigenvalues
+    [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, E is a diagonal matrix of eigenvalues
     
-    eigenvals(:,:,i) = E/1000; % each individual E is the ith item in eigenval
+    eigenvals(:,i) = E/1000; % each individual E is the ith column in eigenval
     eigenvecs(:,:,i) = V; % each individual V is the ith item in eigenvecs               
     % eigenvecs is not used, but nice to have for reference
     % basis is |s,m>
@@ -63,7 +63,7 @@ for i = 1:length(B_0)
 end
 
 % Assemble data
-% eigenvals_vs_BField_data = [transpose(B_0),transpose(eigenvals)];
+eigenvals_vs_BField_data = [transpose(B_0),transpose(eigenvals)];
 
 % Plot each column of data separately
-% plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4));
+plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4));

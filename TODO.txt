@@ -1,0 +1,6 @@
+TODO:
+
+-Fix plotting in diagonalization code (traces do not intersect)
+-Figure out why eigenvalues do not match in the ZFS code. Shape is same, values differ.
+	-Scaling factor is not a power of 10
+	-Plots are centered around different values

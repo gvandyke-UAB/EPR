@@ -1,9 +1,3 @@
 TODO:
 
--Fix plotting in diagonalization code (traces do not intersect)
-	-Since traces are just sets of points, I can't technically find intersections
-	-Can't do curve fitting bc matlab thinks the upper curve is one, so it would draw the wrong curve anyway
-	-Could do a statistical approach where if the average separation of curves is violated to 3 sigma (or whatever) then matlab flips the curves
--Figure out why eigenvalues do not match in the ZFS code. Shape is same, values differ.
-	-Scaling factor is not a power of 10
-	-Plots are centered around different values
+-Eigenvector mystery on spin-5/2 code: still unsolved

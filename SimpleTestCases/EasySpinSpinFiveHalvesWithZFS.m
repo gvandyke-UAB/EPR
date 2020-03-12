@@ -1,3 +1,5 @@
+% The mysterey of why the spin-5/2 EasySpin scripts get different eigenvectors than 
+% our own spin-5/2 diagonalization scripts for B_0 = 0 remains unsolved.
 
 clear Sys;
 clear Exp;
@@ -9,7 +11,7 @@ clear eigenvecsEasySpin;
 
 
 %%%%%%%%%% Spin system parameters %%%%%%%%%%
-Sys.S = 1;
+Sys.S = 5/2;
 Sys.lwpp = 1.6;
 Sys.D = [2213*3 2091]; % Buscher and Lehmann
 %================================%
@@ -34,7 +36,10 @@ for i = 1:1001
     
     B_0 = [0, 0, i-1]; % static magnetic field in mT
     
-    H = zeeman(Sys, B_0) + zfield(Sys);
+    zeemanTerm = zeeman(Sys, B_0);
+    zfsTerm = zfield(Sys);
+    
+    H = zeemanTerm + zfsTerm;
     
     [V,E] = eig(H,'vector'); % V is matrix of eigenvectors, E is column of eigenvalues
     

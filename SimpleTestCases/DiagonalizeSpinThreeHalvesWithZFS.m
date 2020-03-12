@@ -1,4 +1,9 @@
 
+%%%%%%%%%%%% IMPORTANT %%%%%%%%%%%%
+% The MatLab eig() function returns eigenvalues in ascending order,
+% therefore it looks like traces never cross if you zoom in enough. They do
+% in fact cross, it just looks like the traces bounce off each other.
+
 clear B_0;
 clear g;
 clear theta;
@@ -11,19 +16,22 @@ clear i;
 
 % Define spin operators
 
-S_z = [1 0 0;...
-       0 0 0;...
-       0 0 -1];
+S_z = [3/2 0 0 0;...
+       0 1/2 0 0;...
+       0 0 -1/2 0;
+       0 0 0 -3/2];
        
  
-S_x = [0 1/sqrt(2) 0;...
-       1/sqrt(2) 0 1/sqrt(2);...
-       0 1/sqrt(2) 0];
+S_x = [0 sqrt(3)/2 0 0;...
+       sqrt(3)/2 0 1 0;...
+       0 1 0 sqrt(3)/2;...
+       0 0 sqrt(3)/2 0];
 
 
-S_y = [0 i/sqrt(2) 0;...
-       -i/sqrt(2) 0 i/sqrt(2);...
-       0 -i/sqrt(2) 0];
+S_y = [0 sqrt(3)/2i 0 0;...
+       -sqrt(3)/2i 0 1/i 0;...
+       0 -1/i 0 sqrt(3)/2i;...
+       0 0 -sqrt(3)/2i 0];
  
 % Spin operators squared
 S_xx = S_x * S_x;
@@ -31,7 +39,7 @@ S_yy = S_y * S_y;
 S_zz = S_z * S_z;
    
 % Spin number
-s = 1;
+s = 3/2;
 
 % Matrix of S^2 eigenvalue
 S_sq = s*(s+1) * eye(2*s + 1);
@@ -62,4 +70,4 @@ end
 eigenvals_vs_BField_data = [transpose(B_0),transpose(eigenvals)];
 
 % Plot each column of data separately
-plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4));
+plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4),B_0,eigenvals_vs_BField_data(:,5));

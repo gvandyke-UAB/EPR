@@ -9,7 +9,7 @@ clear eigenvecsEasySpin;
 
 
 %%%%%%%%%% Spin system parameters %%%%%%%%%%
-Sys.S = 1;
+Sys.S = 2;
 Sys.lwpp = 1.6;
 Sys.D = [2213*3 2091]; % Buscher and Lehmann
 %================================%

@@ -24,6 +24,7 @@ Freq = 9.4066;
 
 % generate energy level plot
 levelsplot(Sys,'z',FieldRange,Freq,Exp);
+title('EasySpin EPR Energy vs. Magnetic Field Simulation');
 
 
 % get eigenvalues and eigenvectors to compare with our own script

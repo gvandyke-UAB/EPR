@@ -74,3 +74,7 @@ eigenvals_vs_BField_data = [transpose(B_0),transpose(eigenvals)];
 
 % Plot each column of data separately
 plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4),B_0,eigenvals_vs_BField_data(:,5),B_0,eigenvals_vs_BField_data(:,6),B_0,eigenvals_vs_BField_data(:,7));
+
+title('UAB EPR Energy vs. Magnetic Field Simulation');
+xlabel('Magnetic Field (mT)');
+ylabel('Energy (GHz)');

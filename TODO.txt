@@ -1,5 +1,8 @@
 TODO:
 
 -Eigenvector mystery on spin-5/2 code: still unsolved
+
 -Relative Intensities
--Normalize all angle measurements to one line (if roadmaps had another height dimension, normalize that)
+
+-Normalize all angle measurements to one line (if roadmaps had an intensity dimension, normalize that)
+	-Find a more general & functional technique so the code is more easily reused

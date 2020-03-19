@@ -1,12 +1,13 @@
 
-clear, clf % clears all variables and figures
+clear all;
+clf % clears all variables and figures
 
 %%%%%%%%%%%%%%%%%%%% Cr lines %%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 3/2;
 Sys.g = [1.968 0 -0.008; 0 1.964 0; 0 0 1.973];
-Sys.lwpp = 1.6; 
+Sys.lwpp = .3; 
 Sys.D = [3*5385 3*1288];
 %================================%
 
@@ -34,7 +35,7 @@ Exp.CrystalOrientation = cori; % this Exp paramenter must be defined after cori
 
 
 %%%%%%%%%% Generate B field roadmap data %%%%%%%%%%
-[BresCr, CrInt] = resfields(Sys,Exp,Opt);
+[BresCr, CrInt, CrWidth] = resfields(Sys,Exp,Opt);
 angCr = rho * 180/pi - 90;
 [normalizedIntCr, maxCr] = normInt(CrInt); % normalize intensities to itself
 %================================%
@@ -48,7 +49,7 @@ angCr = rho * 180/pi - 90;
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 5/2;
 Sys.g= [2.004 2.002 2.007];
-Sys.lwpp = 1.6;
+Sys.lwpp = .3;
 Sys.D = [3*5385 3*1288];
 % reproduces RT angle dependence of Ga2O3:Mg doped sample well except for
 % relative line intensities
@@ -85,18 +86,19 @@ angFe = rho * 180/pi - 90;
 %================================%
 
 
-%%%%%%%%% Grand Normalization %%%%%%%%%
-setToOne = max(maxFe, maxCr);
+%%%%%%%%% Overall Normalization %%%%%%%%%
+setToOne = max(maxFe, maxCr); % find which value to regard as our "1"
 normalizedIntFe = normalizedIntFe * maxFe / setToOne; % "undoes" normalization then redoes it with global max val
 normalizedIntCr = normalizedIntCr * maxCr / setToOne; % this technique is ridiculous but works
 
 
 %%%%%%%%%% Plotting %%%%%%%%%%
-plot3(BresFe*10, angFe, normalizedIntFe,'b','linewidth',2); % blue traces
+plot3(BresFe*10, angFe, normalizedIntFe,'b','linewidth',2,'DisplayName','Fe'); % blue traces
 hold on;
-plot3(BresCr*10, angCr, normalizedIntCr,'k','linewidth',2); % black traces
-xlabel('Angle of rotation (°)');
-ylabel('Magnetic Field (mT)');
+plot3(BresCr*10, angCr, normalizedIntCr,'k','linewidth',2,'DisplayName','Cr'); % black traces
+legend
+xlabel('Magnetic Field (mT)');
+ylabel('Angle of rotation (°)');
 zlabel('Relative Intensity (a.u.)');
 %================================%
 

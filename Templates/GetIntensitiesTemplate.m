@@ -92,7 +92,9 @@ normalizedIntCr = normalizedIntCr * maxCr / setToOne; % this technique is ridicu
 
 
 %%%%%%%%%% Plotting %%%%%%%%%%
-plot3(BresFe*10, angFe, normalizedIntFe, 'b', BresCr*10, angCr, normalizedIntCr, 'k'); % blue and black traces
+plot3(BresFe*10, angFe, normalizedIntFe,'b','linewidth',2); % blue traces
+hold on;
+plot3(BresCr*10, angCr, normalizedIntCr,'k','linewidth',2); % black traces
 xlabel('Angle of rotation (°)');
 ylabel('Magnetic Field (mT)');
 zlabel('Relative Intensity (a.u.)');

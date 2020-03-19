@@ -1,11 +1,47 @@
 
 clear, clf % clears all variables and figures
 
-%================================================================%
-            % spectra from single crystal rotation %
-%================================================================%
+%%%%%%%%%%%%%%%%%%%% Cr lines %%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Spin parameters %%%%%%%%%%
+Sys.S = 3/2;
+Sys.g = [1.968 0 -0.008; 0 1.964 0; 0 0 1.973];
+Sys.lwpp = 1.6; 
+Sys.D = [3*5385 3*1288];
+%================================%
+
+
+%%%%%%%%%% Optional parameters %%%%%%%%%%
+Opt.Output = 'separate'; % make sure spectra are not added up
+%================================%
+
+
+%%%%%%%%%% Experimental parameters %%%%%%%%%%
+Exp.mwFreq = 9.4066;
+Exp.Range = [50 1100];
+Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
+Exp.Temperature = 298; 
+%================================%
+
+
+%%%%%%%%%% Generate rotations about nL %%%%%%%%%%
+nL = [1;0;0]; % rotating about mW magnetic field
+cori0 = [0 102 0] * pi/180; 
+rho = (90:2:270) * pi/180;
+cori = rotatecrystal(cori0,nL,rho);
+Exp.CrystalOrientation = cori; % this Exp paramenter must be defined after cori
+%================================%
+
+
+%%%%%%%%%% Generate B field roadmap data %%%%%%%%%%
+[BresCr, CrInt] = resfields(Sys,Exp,Opt);
+angCr = rho * 180/pi - 90;
+[normalizedIntCr, maxCr] = normInt(CrInt); % normalize intensities to itself
+%================================%
+
+
+
+%%%%%%%%%%%%%%%%%%%% Fe3+ lines %%%%%%%%%%%%%%%%%%%%
 
 % Octahedral
 
@@ -43,33 +79,24 @@ Exp.CrystalOrientation = cori; % this Exp paramenter must be defined after cori
 
 
 %%%%%%%%%% Generate B field roadmap data %%%%%%%%%%
-[BresFe, Int] = resfields(Sys,Exp,Opt);
-ang = rho * 180/pi - 90;
+[BresFe, FeInt] = resfields(Sys,Exp,Opt);
+angFe = rho * 180/pi - 90;
+[normalizedIntFe, maxFe] = normInt(FeInt); % normalize intensities to itself
 %================================%
 
-normalizedInt = normInt(Int);
+
+%%%%%%%%% Grand Normalization %%%%%%%%%
+setToOne = max(maxFe, maxCr);
+normalizedIntFe = normalizedIntFe * maxFe / setToOne; % "undoes" normalization then redoes it with global max val
+normalizedIntCr = normalizedIntCr * maxCr / setToOne; % this technique is ridiculous but works
+
 
 %%%%%%%%%% Plotting %%%%%%%%%%
-plot3(BresFe*10, ang, normalizedInt);
-ylabel('Magnetic Field (mT)');
+plot3(BresFe*10, angFe, normalizedIntFe, 'b', BresCr*10, angCr, normalizedIntCr, 'k'); % blue and black traces
 xlabel('Angle of rotation (°)');
+ylabel('Magnetic Field (mT)');
+zlabel('Relative Intensity (a.u.)');
 %================================%
-
-
-%%%%%%%%%% Save data to .txt %%%%%%%%%%
-pointsFe = makeResfieldsCSVtxt(BresFe, rho, 'BresFe');
-
-%The .txt file now follows the formatting:
-
-%Trace 1 X |Trace 1 Y |Trace 2 X |Trace 2 Y |.....
-%          |          |          |          |
-%          |          |          |          |
-%          |          |          |          |
-%          |          |          |          |
-%          |          |          |          |
-%          |          |          |          |
-%          |          |          |          |
-%=================================================%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -139,7 +166,7 @@ end
 
 % The following function takes in the intensities outputted by resfields
 % and normalizes them all to 1
-function normalizedIntensities = normInt(intMatrix)
+function [normalizedIntensities, maxVal] = normInt(intMatrix)
 
 maxVal = intMatrix(1,1);
 

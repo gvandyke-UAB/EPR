@@ -5,10 +5,12 @@
 clear Sys;
 clear Exp;
 clear Opt;
+clear eigenvalsEasySpin;
+clear eigenvecsEasySpin;
 
 
 %%%%%%%%%% Spin system parameters %%%%%%%%%%
-Sys.S = 1/2;
+Sys.S = 5/2;
 Sys.lwpp = 1.6;
 Sys.D = [2213*3 2091]; % Buscher and Lehmann
 %================================%

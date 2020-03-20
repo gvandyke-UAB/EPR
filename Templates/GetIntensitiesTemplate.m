@@ -7,7 +7,7 @@ clf % clears all variables and figures
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 3/2;
 Sys.g = [1.968 0 -0.008; 0 1.964 0; 0 0 1.973];
-Sys.lwpp = .3; 
+%Sys.lwpp = .3; 
 Sys.D = [3*5385 3*1288];
 %================================%
 
@@ -21,7 +21,7 @@ Opt.Output = 'separate'; % make sure spectra are not added up
 Exp.mwFreq = 9.4066;
 Exp.Range = [50 1100];
 Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
-Exp.Temperature = 298; 
+Exp.Temperature = 4000; 
 %================================%
 
 
@@ -49,7 +49,7 @@ angCr = rho * 180/pi - 90;
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 5/2;
 Sys.g= [2.004 2.002 2.007];
-Sys.lwpp = .3;
+%Sys.lwpp = .3;
 Sys.D = [3*5385 3*1288];
 % reproduces RT angle dependence of Ga2O3:Mg doped sample well except for
 % relative line intensities

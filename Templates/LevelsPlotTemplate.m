@@ -1,5 +1,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Octahedral
 
 clear Sys;
@@ -24,15 +25,16 @@ Exp.CrystalSymmetry = 'C2/m'; % assumes 'b' is yC
 Exp.nPoints = 1e5;
 %================================%
 
+
+%%%%%%%%%% Generate energy level plot %%%%%%%%%%
 FieldRange = [0 1000];
 Freq = 9.4066;
-
-% generate energy level plot
 levelsplot(Sys,'z',FieldRange,Freq,Exp);
+%================================%
 
 
 % get eigenvalues and eigenvectors to compare with our own script
-% "Diagonalize.m"
+% "DiagonalizeTemplate.m"
 for i = 1:1001
     
     B_0 = [0, 0, i-1]; % static magnetic field in mT

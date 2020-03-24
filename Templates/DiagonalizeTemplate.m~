@@ -81,11 +81,9 @@ for i = 1:length(B_0)
     % basis is |s,m>
 end
 
-% assemble data
+% 
 eigenvals_vs_BField_data = [transpose(B_0),transpose(eigenvals)];
 
-% plot
-for i = 2:size(eigenvals_vs_BField_data,2)
-    plot(B_0,eigenvals_vs_BField_data(:,i))
-    hold on
-end
+plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4),B_0,eigenvals_vs_BField_data(:,5)...
+    ,B_0,eigenvals_vs_BField_data(:,6),B_0,eigenvals_vs_BField_data(:,7));
+    % plots each column of data separately

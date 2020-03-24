@@ -3,7 +3,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % The following function takes two CSV-style .txt files and horizontally
-% concatenates them.
+% concatenates them. It also adds units to the top of the CSV, change as
+% necessary.
 
 function finaltxt = combinetxt(x,y)
 % if the matrices we want to combine into one .txt file are of different

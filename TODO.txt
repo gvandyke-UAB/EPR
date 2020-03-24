@@ -1,8 +1,5 @@
 TODO:
 
--Normalize all angle measurements to one line (if roadmaps had an intensity dimension, normalize that)
-	-Find a more general & functional technique so the code is more easily reused
-
--Ask about line widths from resfields on forum
-
 -Get angular dependent Fe3+ and Fe2+ data (RT and 30K) from Suman, compare to roadmap predictions for Cr and Fe3+
+
+-As experimentalists, how do we determine the cause of an effect that could be brought about through multiple interactions, but yield the same net result?

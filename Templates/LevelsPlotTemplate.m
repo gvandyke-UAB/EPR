@@ -1,4 +1,6 @@
 
+% This script plots energy eigenvalues for a spin system as a function of magnetic field
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Octahedral
@@ -29,7 +31,9 @@ Exp.nPoints = 1e5;
 %%%%%%%%%% Generate energy level plot %%%%%%%%%%
 FieldRange = [0 1000];
 Freq = 9.4066;
+
 levelsplot(Sys,'z',FieldRange,Freq,Exp);
+title('EasySpin EPR Energy vs. Magnetic Field Simulation');
 %================================%
 
 

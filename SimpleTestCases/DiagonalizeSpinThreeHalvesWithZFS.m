@@ -69,8 +69,11 @@ end
 % Assemble data
 eigenvals_vs_BField_data = [transpose(B_0),transpose(eigenvals)];
 
-% Plot each column of data separately
-plot(B_0,eigenvals_vs_BField_data(:,2),B_0,eigenvals_vs_BField_data(:,3),B_0,eigenvals_vs_BField_data(:,4),B_0,eigenvals_vs_BField_data(:,5));
+% plot
+for i = 2:size(eigenvals_vs_BField_data,2)
+    plot(B_0,eigenvals_vs_BField_data(:,i))
+    hold on
+end
 
 title('UAB EPR Energy vs. Magnetic Field Simulation');
 xlabel('Magnetic Field (mT)');

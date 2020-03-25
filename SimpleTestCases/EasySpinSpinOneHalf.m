@@ -22,12 +22,14 @@ Exp.CrystalSymmetry = 'C2/m'; % assumes 'b' is yC
 Exp.nPoints = 1e5;
 %================================%
 
+
+%%%%%%%%%% Generate energy level plot %%%%%%%%%%
 FieldRange = [0 1000];
 Freq = 9.4066;
 
-% generate energy level plot
 levelsplot(Sys,'z',FieldRange,Freq,Exp);
 title('EasySpin EPR Energy vs. Magnetic Field Simulation');
+%================================%
 
 
 % get eigenvalues and eigenvectors to compare with our own script
@@ -45,4 +47,3 @@ for i = 1:1001
     
 end
 
-hold;

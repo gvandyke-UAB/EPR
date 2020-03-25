@@ -98,6 +98,7 @@ plot3(BresFe*10, angFe, normalizedIntFe,'b','linewidth',2,'DisplayName','Fe'); %
 hold on;
 plot3(BresCr*10, angCr, normalizedIntCr,'k','linewidth',2,'DisplayName','Cr'); % black traces
 legend
+title('Roadmap + Intensities for Fe3+ and Cr');
 xlabel('Magnetic Field (mT)');
 ylabel('Angle of rotation (°)');
 zlabel('Relative Intensity (a.u.)');

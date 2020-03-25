@@ -1,4 +1,7 @@
 
+% This script generates roadmap plots and outputs a CSV .txt file with the
+% roadmap data
+
 clear, clf % clears all variables and figures
 
 %%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%
@@ -54,7 +57,7 @@ pointsCr = makeResfieldsCSVtxt(BresCr, rho, 'BresCr');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% At this point, define new Sys, Exp, and Opt parameters %%%%%%%
-%%%%%%% for the following roadmap %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% for the roadmap you'd like to overlay %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

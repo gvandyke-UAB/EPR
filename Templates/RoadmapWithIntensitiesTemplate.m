@@ -20,6 +20,7 @@ cori = rotatecrystal(cori0,nL,rho);
 Sys.S = 3/2;
 Sys.g = [1.968 0 -0.008; 0 1.964 0; 0 0 1.973];
 Sys.D = [3*5385 3*1288];
+Sys.DStrain = [10 12]; % values are for experimenting and do not reflect sample at this time
 %================================%
 
 
@@ -38,7 +39,7 @@ Exp.CrystalOrientation = cori;
 
 
 %%%%%%%%%% Generate B field roadmap data %%%%%%%%%%
-[BresCr, IntCr] = resfields(Sys,Exp,Opt);
+[BresCr, IntCr, WidCr] = resfields(Sys,Exp,Opt);
 angCr = rho * 180/pi - 90;
 %================================%
 
@@ -60,6 +61,7 @@ cori = rotatecrystal(cori0,nL,rho);
 Sys.S = 5/2;
 Sys.g= [2.004 2.002 2.007];
 Sys.D = [3*5385 3*1288];
+Sys.DStrain = [10 12]; % values are for experimenting and do not reflect sample at this time
 % reproduces RT angle dependence of Ga2O3:Mg doped sample well except for
 % relative line intensities
 %================================%
@@ -81,7 +83,7 @@ Exp.CrystalOrientation = cori;
 
 
 %%%%%%%%%% Generate B field roadmap data %%%%%%%%%%
-[BresFe, IntFe] = resfields(Sys,Exp,Opt);
+[BresFe, IntFe, WidFe] = resfields(Sys,Exp,Opt);
 angFe = rho * 180/pi - 90;
 %================================%
 

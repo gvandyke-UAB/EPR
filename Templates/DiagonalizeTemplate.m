@@ -93,6 +93,7 @@ for i = 2:size(eigenvals_vs_BField_data,2)
     hold on
 end
 
+set(gcf,'name','Energy Eigenvalues UAB Simulation','numbertitle','off');
 title('UAB EPR Energy vs. Magnetic Field Simulation');
 xlabel('Magnetic Field (mT)');
 ylabel('Energy (GHz)');

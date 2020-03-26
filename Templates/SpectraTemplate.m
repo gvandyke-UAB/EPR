@@ -1,6 +1,8 @@
 
 %%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%
 
+center1 = 'Fe3+'; % name your EPR center for plotting
+
 % Octahedral
 
 %%%%%%%%%% Generate rotations about nL %%%%%%%%%%
@@ -35,6 +37,10 @@ Opt.Output = 'separate';  % make sure spectra are not added up
 
 %%%%%%%%%% Simulate spectra %%%%%%%%%%
 pepper(Sys,Exp,Opt); % this pepper call plots
+
+set(gcf, 'Name','Spectrum EasySpin Simulation','numbertitle','off');
+title(strcat(center1,{' '},'Spectrum'));
+
 [B,spec] = pepper(Sys,Exp,Opt); % this pepper call stores values so we can write them to a .txt file
 %================================%
 

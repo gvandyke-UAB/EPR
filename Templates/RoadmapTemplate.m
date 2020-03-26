@@ -4,6 +4,8 @@
 
 clear, clf % clears all variables and figures
 
+center1 = 'Fe3+';
+center2 = 'Cr';
 %%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%
 
 
@@ -60,6 +62,12 @@ pointsCr = makeResfieldsCSVtxt(BresCr, rho, 'BresCr');
 %%%%%%% for the roadmap you'd like to overlay %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%% Spin parameters %%%%%%%%%%
+Sys.S = 5/2;
+Sys.g= [2.004 2.002 2.007];
+Sys.D = [3*5385 3*1288];
+%================================%
+
 
 %%%%%%%%%% Generate B field roadmap data %%%%%%%%%%
 BresFe = resfields(Sys,Exp,Opt);
@@ -69,6 +77,9 @@ ang = rho * 180/pi - 90;
 
 %%%%%%%%%% Plotting %%%%%%%%%%
 plot(BresFe*10,ang,'linewidth',3,'color','k'); % black traces
+
+set(gcf, 'Name','Roadmap EasySpin Simulation','numbertitle','off');
+title(strcat('Roadmap + Intensities for',{' '}, center1,{' '}, 'and',{' '}, center2));
 %================================%
 
 

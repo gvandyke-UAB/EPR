@@ -33,6 +33,8 @@ FieldRange = [0 1000];
 Freq = 9.4066;
 
 levelsplot(Sys,'z',FieldRange,Freq,Exp);
+
+set(gcf, 'Name','Energy Eigenvalues EasySpin Simulation','numbertitle','off');
 title('EasySpin EPR Energy vs. Magnetic Field Simulation');
 %================================%
 

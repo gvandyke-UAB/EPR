@@ -1,5 +1,7 @@
 TODO:
 
--As experimentalists, how do we determine the cause of an effect that could be brought about through multiple interactions, but yield the same net result?
+-As experimentalists, how do we determine the cause of an effect that could be brought about through multiple interactions, but yield the same net result? (g-strain or D-strain?)
+
+-Why is the angular data labeled intensity when it's the derivative of absorption?
 
 -How would we probe D-strain? Or are we just using D-strain as the most likely candidate for what we see, then choosing the best value for it?

@@ -15,7 +15,7 @@ cori = rotatecrystal(cori0,nL,rho);
 
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 5/2;
-Sys.g= [2.004 2.002 2.007];
+Sys.g = [2.004 2.002 2.007];
 Sys.lwpp = 1.6;
 %================================%
 

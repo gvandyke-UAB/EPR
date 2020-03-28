@@ -63,7 +63,7 @@ cori = rotatecrystal(cori0,nL,rho);
 
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 5/2;
-Sys.g= [2.004 2.002 2.007];
+Sys.g = [2.004 2.002 2.007];
 Sys.D = [3*5385 3*1288];
 Sys.DStrain = [10 12]; % values are for experimenting and do not reflect sample at this time
 % reproduces RT angle dependence of Ga2O3:Mg doped sample well except for

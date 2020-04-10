@@ -14,10 +14,8 @@ clear eigenvecsEasySpin;
 Sys.S = 3/2;
 
 %Sys.g = [1.968 0 -.008;...
-%         0 1.964 0;...
-%         -.008 0 1.973]; % Full g-tensor
-
-Sys.g = [1.962 1.964 1.979]; % g principal values
+ %        0 1.964 0;...
+  %       -.008 0 1.973];
 
 %Sys.D = [3*1548 1288];
 

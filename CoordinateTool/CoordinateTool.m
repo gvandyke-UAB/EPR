@@ -59,9 +59,3 @@ rotationAngle = input('Rotation angle, if any (in degrees): ');
 planePossibilities = {'a,c','a*,c','a,c*','a,b','a*,b','a,b*','b,c','b*,c','b,c*'};
 
 end
-
-
-
-
-
-

@@ -22,7 +22,7 @@ originalCrystal = originalCrystal.adjustAxes('c','yL',-13);
 originalCrystal.showit();
 
 % user confirmation
-if ~userconfirmation('Is the crystal orientation correct? (y/n): ')
+if ~userconfirmation('Is the base crystal orientation correct? (y/n): ')
     return
 else
 end
@@ -38,7 +38,7 @@ end
 rotatedCrystal.showit();
 
 % user confirmation
-if ~userconfirmation('Is the crystal orientation correct? (y/n): ')
+if ~userconfirmation('Is the rotated crystal orientation correct? (y/n): ')
     return
 else
 end

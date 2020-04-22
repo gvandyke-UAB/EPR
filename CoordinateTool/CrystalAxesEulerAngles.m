@@ -19,36 +19,32 @@ originalCrystal = originalCrystal.adjustAxes('c','yL',-13);
     % "I want to rotate the current c-axis about the 'yL' axis -13 degrees"
 
 % display 1
-originalCrystal.showit();
+originalCrystal.showAxesFigure();
 
 % user confirmation
-if ~userconfirmation('Is the base crystal orientation correct? (y/n): ')
+if ~userConfirmation('Is the base crystal orientation correct? (y/n): ')
     return
 else
 end
 
 % rotate whole crystal structure, keeping lab frame intact. You may stack
-% as many rotations here as you like, as long as you remember to include those 
-% matrix# outputs in the totalRotationMatrix variable below
-[rotatedCrystal,matrix1] = originalCrystal.rotateAxes('zL',90);
-[rotatedCrystal,matrix2] = rotatedCrystal.rotateAxes('yL',90);
+% as many rotations here as you like
+rotatedCrystal = originalCrystal.rotateAxes('zL',90);
+rotatedCrystal = rotatedCrystal.rotateAxes('yL',90);
     % "I want to align the microwave magnetic field with c*"
 
 % display 2
-rotatedCrystal.showit();
+rotatedCrystal.showAxesFigure();
 
 % user confirmation
-if ~userconfirmation('Is the rotated crystal orientation correct? (y/n): ')
+if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
     return
 else
 end
 
-% make the total rotation matrix
-totalRotationMatrix = matrix2 * matrix1; % matrices in REVERSE order, important because they don't commute
-
 % returns the Euler angles (ready for EasySpin) for transforming original crystal (display 1) to rotated
 % crystal (display 2)
-eulZYZ = rotm2eul(totalRotationMatrix,'ZYZ');
+eulZYZ = rotm2eul(rotatedCrystal.completeRotationMatrix,'ZYZ');
 
 % ask user if there will be rotation during experiment (does nothing yet)
 if ~userCheckForRotation('Will the crystal rotate in the experiment? (y/n): ',eulZYZ)
@@ -80,11 +76,13 @@ for i = 1:(N-1)
     
 end
 
-disp('The Euler angles for each orientation are as follows:');
+disp('The Euler angles (in radians) for each orientation are as follows:');
 eulZYZ
 
 
-function feedback = userconfirmation(question)
+%%%%%%%%%%%%%%%%%%%%%% Function Section %%%%%%%%%%%%%%%%%%%%%%
+
+function feedback = userConfirmation(question)
 
 correct = input(question,'s');
 if correct == 'n'
@@ -92,7 +90,7 @@ if correct == 'n'
     feedback = false;
 elseif correct ~= 'y'
     disp('I need confirmation in either a "y" or an "n".');
-    feedback = userconfirmation();
+    feedback = userConfirmation();
 else
     feedback = true;
 end
@@ -103,7 +101,7 @@ function feedback = userCheckForRotation(question,EulerAngles)
 
 correct = input(question,'s');
 if correct == 'n'
-    disp(horzcat('The Euler angles (in radian) for your orientation are: ',mat2str(EulerAngles)));
+    disp(horzcat('The Euler angles (in radians) for your orientation are: ',mat2str(EulerAngles)));
     feedback = false;
 elseif correct ~= 'y'
     disp('I need confirmation in either a "y" or an "n".');

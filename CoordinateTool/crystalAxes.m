@@ -6,6 +6,7 @@ classdef crystalAxes
         aAxis {mustBeNumeric}
         bAxis {mustBeNumeric}
         cAxis {mustBeNumeric}
+        completeRotationMatrix = [1,0,0;0,1,0;0,0,1]; % starts as identity matrix
     end
     
     methods
@@ -24,35 +25,29 @@ classdef crystalAxes
             if strcmp(labAxis,'xL')
                 rotationMatrix = rotz(angle);
                 if strcmp(axis,'b')
-                    col = rotationMatrix*obj.bAxis.';
-                    obj.bAxis = col.';
+                    obj.bAxis = (rotationMatrix*obj.bAxis.').';                   
                 elseif strcmp(axis,'c')
-                    col = rotationMatrix*obj.cAxis;
-                    obj.cAxis = col.';
+                    obj.cAxis = (rotationMatrix*obj.cAxis.').';                   
                 end
             elseif strcmp(labAxis,'yL')
                 rotationMatrix = rotx(angle);
                 if strcmp(axis,'a')
-                    col = rotationMatrix*obj.aAxis.';
-                    obj.aAxis = col.';
+                    obj.aAxis = (rotationMatrix*obj.aAxis.').';
                 elseif strcmp(axis,'c')
-                    col = rotationMatrix*obj.cAxis.';
-                    obj.cAxis = col.';
+                    obj.cAxis = (rotationMatrix*obj.cAxis.').';                   
                 end
             elseif strcmp(labAxis,'zL')
                 rotationMatrix = roty(angle);
                 if strcmp(axis,'a')
-                    col = rotationMatrix*obj.aAxis.';
-                    obj.aAxis = col.';
+                    obj.aAxis = (rotationMatrix*obj.aAxis.').';                  
                 elseif strcmp(axis,'b')
-                    col = rotationMatrix*obj.bAxis.';
-                    obj.bAxis = col.';
+                    obj.bAxis = (rotationMatrix*obj.bAxis.').';
                 end
             end
            adjustedAxes = obj; 
         end
         
-        function [rotatedAxes,overallRotationMatrix] = rotateAxes(obj,labAxis,angle)
+        function rotatedAxes = rotateAxes(obj,labAxis,angle)
             % rotates all 3 axes about labAxis by angle
             if strcmp(labAxis,'xL')
                 rotationMatrix = rotz(angle);
@@ -70,13 +65,16 @@ classdef crystalAxes
                 obj.bAxis = (rotationMatrix*obj.bAxis.').';
                 obj.cAxis = (rotationMatrix*obj.cAxis.').';
             end
+            obj.completeRotationMatrix = rotationMatrix * obj.completeRotationMatrix;
             rotatedAxes = obj;
-            overallRotationMatrix = rotationMatrix;
         end
         
-        function showit(obj)
+        function showAxesFigure(obj)
             % this function is written purely beause quiver3 is ridiculous
             % and needs some preprocessing 
+            
+            close
+            
             xCoordinates = [obj.aAxis(1) obj.bAxis(1) obj.cAxis(1)];
             yCoordinates = [obj.aAxis(2) obj.bAxis(2) obj.cAxis(2)];
             zCoordinates = [obj.aAxis(3) obj.bAxis(3) obj.cAxis(3)];

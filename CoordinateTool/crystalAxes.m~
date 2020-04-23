@@ -54,62 +54,41 @@ classdef crystalAxes
             % rotates all 3 axes about labAxis by angle
             if strcmp(labAxis,'xL')
                 rotationMatrix = rotz(angle);
-                obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
-                obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
-                obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
+                obj.aAxisFinal = (rotationMatrix*obj.aAxis.').';
+                obj.bAxisFinal = (rotationMatrix*obj.bAxis.').';
+                obj.cAxisFinal = (rotationMatrix*obj.cAxis.').';
             elseif strcmp(labAxis,'yL')
                 rotationMatrix = rotx(angle);
-                obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
-                obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
-                obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
+                obj.aAxisFinal = (rotationMatrix*obj.aAxis.').';
+                obj.bAxisFinal = (rotationMatrix*obj.bAxis.').';
+                obj.cAxisFinal = (rotationMatrix*obj.cAxis.').';
             elseif strcmp(labAxis,'zL')
                 rotationMatrix = roty(angle);
-                obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
-                obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
-                obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
+                obj.aAxisFinal = (rotationMatrix*obj.aAxis.').';
+                obj.bAxisFinal = (rotationMatrix*obj.bAxis.').';
+                obj.cAxisFinal = (rotationMatrix*obj.cAxis.').';
             end
             obj.completeRotationMatrix = rotationMatrix * obj.completeRotationMatrix;
             rotatedAxes = obj;
         end
         
-        function showInitialAxesFigure(obj)
+        function showAxesFigure(obj)
             % this function is written purely beause quiver3 is ridiculous
             % and needs some preprocessing 
             
             close
             
-            xCoordinates = [obj.aAxisInitial(1) obj.bAxisInitial(1) obj.cAxisInitial(1)];
-            yCoordinates = [obj.aAxisInitial(2) obj.bAxisInitial(2) obj.cAxisInitial(2)];
-            zCoordinates = [obj.aAxisInitial(3) obj.bAxisInitial(3) obj.cAxisInitial(3)];
+            xCoordinates = [obj.aAxis(1) obj.bAxis(1) obj.cAxis(1)];
+            yCoordinates = [obj.aAxis(2) obj.bAxis(2) obj.cAxis(2)];
+            zCoordinates = [obj.aAxis(3) obj.bAxis(3) obj.cAxis(3)];
             
             figure('NumberTitle', 'off', 'Name', 'Crystal Axes Euler Angle Tool');
             quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1);
             xlabel('yL');ylabel('zL'),zlabel('xL');
             
-            text(obj.aAxisInitial(1),obj.aAxisInitial(2),obj.aAxisInitial(3),'a-axis');
-            text(obj.bAxisInitial(1),obj.bAxisInitial(2),obj.bAxisInitial(3),'b-axis');
-            text(obj.cAxisInitial(1),obj.cAxisInitial(2),obj.cAxisInitial(3),'c-axis');
-            
-            
-        end
-        
-        function showFinalAxesFigure(obj)
-            % this function is written purely beause quiver3 is ridiculous
-            % and needs some preprocessing 
-            
-            close
-            
-            xCoordinates = [obj.aAxisFinal(1) obj.bAxisFinal(1) obj.cAxisFinal(1)];
-            yCoordinates = [obj.aAxisFinal(2) obj.bAxisFinal(2) obj.cAxisFinal(2)];
-            zCoordinates = [obj.aAxisFinal(3) obj.bAxisFinal(3) obj.cAxisFinal(3)];
-            
-            figure('NumberTitle', 'off', 'Name', 'Crystal Axes Euler Angle Tool');
-            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1);
-            xlabel('yL');ylabel('zL'),zlabel('xL');
-            
-            text(obj.aAxisFinal(1),obj.aAxisFinal(2),obj.aAxisFinal(3),'a-axis');
-            text(obj.bAxisFinal(1),obj.bAxisFinal(2),obj.bAxisFinal(3),'b-axis');
-            text(obj.cAxisFinal(1),obj.cAxisFinal(2),obj.cAxisFinal(3),'c-axis');
+            text(obj.aAxis(1),obj.aAxis(2),obj.aAxis(3),'a-axis');
+            text(obj.bAxis(1),obj.bAxis(2),obj.bAxis(3),'b-axis');
+            text(obj.cAxis(1),obj.cAxis(2),obj.cAxis(3),'c-axis');
             
             
         end

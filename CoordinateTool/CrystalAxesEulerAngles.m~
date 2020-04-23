@@ -8,18 +8,18 @@
 % crystal. This program achieves that same effect.
 
 % create crystal axis 
-Crystal = crystalAxes([0,0,1],[1,0,0],[0,1,0]); % a, b, c order of args
+originalCrystal = crystalAxes([0,0,1],[1,0,0],[0,1,0]); % a, b, c order of args
     % to the computer, a is the z axis, b is the x axis, and c is the y
     % axis. We rename these 'xL', 'yL', and 'zL', respectively. We do it
     % this way so the plots visually correspond to the experiental setup,
     % hopefully making this tool more intuitive.
 
 % set orientation of axes relative to each other (beta angle adjustment)
-Crystal = Crystal.adjustAxes('c','yL',-13);
+originalCrystal = originalCrystal.adjustAxes('c','yL',-13);
     % "I want to rotate the current c-axis about the 'yL' axis -13 degrees"
 
 % display 1
-Crystal.showInitialAxesFigure();
+originalCrystal.showInitialAxesFigure();
 
 % user confirmation
 if ~userConfirmation('Is the base crystal orientation correct? (y/n): ')
@@ -29,13 +29,13 @@ end
 
 % rotate whole crystal structure, keeping lab frame intact. You may stack
 % as many rotations here as you like
-Crystal = Crystal.rotateAxes('zL',90);
+rotatedCrystal = originalCrystal.rotateAxes('zL',90);
     % "I want to rotate the whole crystal about the zL axis 90 degrees"
-Crystal = Crystal.rotateAxes('yL',90);
+rotatedCrystal = rotatedCrystal.rotateAxes('yL',90);
     % "I want to rotate the whole crystal about the yL axis 90 degrees"
 
 % display 2
-Crystal.showFinalAxesFigure();
+rotatedCrystal.showFinalAxesFigure();
 
 % user confirmation
 if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
@@ -43,9 +43,9 @@ if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
 else
 end
 
-% returns the Euler angles (ready for EasySpin) for transforming original
-% crystal (display 1) to rotated crystal (display 2)
-eulZYZ = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
+% returns the Euler angles (ready for EasySpin) for transforming original crystal (display 1) to rotated
+% crystal (display 2)
+eulZYZ = rotm2eul(rotatedCrystal.completeRotationMatrix,'ZYZ');
 
 % ask user if there will be rotation during experiment (does nothing yet)
 if ~userCheckForRotation('Will the crystal rotate in the experiment? (y/n): ',eulZYZ)
@@ -67,27 +67,21 @@ angleChunk = 180/(N-1);
 % preallocate space in eulZYZ
 eulZYZ = [eulZYZ;zeros(N-1,3)];
 
-for i = 2:N
+for i = 1:(N-1)
     
-    Crystal = Crystal.rotateAxes('xL',angleChunk);
-        % the hard-coded "xL" here is me assuming the rotation will be
-        % about the microwave magnetic field
+    rotatedCrystal = rotatedCrystal.rotateAxes('xL',angleChunk);
     
-    eulZYZ(i,:) = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
-        % index starts at 2 bc eulZYZ already has one row filled
+    totalRotationMatrix = stepMatrix * totalRotationMatrix;
+    
+    eulZYZ(i+1,:) = rotm2eul(rotatedCrystal.completeRotationMatrix,'ZYZ');
+    
 end
 
 disp('The Euler angles (in radians) for each orientation are as follows:');
 eulZYZ
 
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Function Section %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Function Section %%%%%%%%%%%%%%%%%%%%%%
 
 function feedback = userConfirmation(question)
 

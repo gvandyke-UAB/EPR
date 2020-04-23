@@ -7,19 +7,22 @@
 % crystal if you held it in your hand: your head isn't moving with the
 % crystal. This program achieves that same effect.
 
-% create crystal object
-Crystal = crystalAxes([0,0,1],[1,0,0],[0,1,0]); % a, b, c order of args.
-    % To the computer, a is the z axis, b is the x axis, and c is the y
-    % axis. We rename these 'xL', 'yL', and 'zL', respectively. We do it
-    % this way so the plots visually correspond to the experiental setup,
-    % hopefully making this tool more intuitive.
 
+% create crystalAxes object
+Crystal = crystalAxes([1,0,0],[0,1,0],[0,0,1]); % a, b, c order of args.
+    % Sets a-axis as the x unit vector, b-axis as y unit vector, c-axis as
+    % z unit vector. So it's not a monoclinic crystal yet.
+
+    
 % set orientation of axes relative to each other (beta angle adjustment)
 Crystal = Crystal.adjustAxes('c','yL',-13);
     % "I want to rotate the current c-axis about the 'yL' axis -13 degrees"
+    % Now it's a monoclinic crystal structure
 
+    
 % display 1
 Crystal.showInitialAxesFigure();
+
 
 % user confirmation
 if ~userConfirmation('Is the base crystal orientation correct? (y/n): ')
@@ -28,15 +31,18 @@ if ~userConfirmation('Is the base crystal orientation correct? (y/n): ')
 else
 end
 
+
 % rotate whole crystal structure, keeping lab frame intact. You may stack
 % as many rotations here as you like
-Crystal = Crystal.rotateAxes('zL',90);
+%Crystal = Crystal.rotateAxes('zL',90);
     % "I want to rotate the whole crystal about the zL axis 90 degrees"
-Crystal = Crystal.rotateAxes('yL',90);
+Crystal = Crystal.rotateAxes('yL',-13);
     % "Now I want to rotate the whole crystal about the yL axis 90 degrees"
 
+    
 % display 2
 Crystal.showFinalAxesFigure();
+
 
 % user confirmation
 if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
@@ -45,9 +51,11 @@ if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
 else
 end
 
+
 % returns the Euler angles (ready for EasySpin) for transforming original
 % crystal (display 1) to rotated crystal (display 2)
 eulZYZ = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
+
 
 % ask user if there will be rotation during experiment
 if ~userCheckForRotation('Will the crystal rotate in the experiment? (y/n): ',eulZYZ)
@@ -55,6 +63,7 @@ if ~userCheckForRotation('Will the crystal rotate in the experiment? (y/n): ',eu
     return
 else
 end
+
 
 % if there is rotation i.e. taking spectra at multiple angles, then we
 % return a bunch of Euler angles, each corresponding to one stop in the
@@ -64,11 +73,14 @@ end
 % ask user how many stops we'll be making
 N = input('How many spectra will be taken between 0 and 180 degrees? (assuming evenly spaced intervals): ');
 
+
 % angle step for each spectra
 angleChunk = 180/(N-1);
 
+
 % preallocate space in eulZYZ
 eulZYZ = [eulZYZ;zeros(N-1,3)];
+
 
 for i = 2:N
     
@@ -78,13 +90,12 @@ for i = 2:N
     
     eulZYZ(i,:) = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
         % index starts at 2 bc eulZYZ already has one row filled
+        
 end
+
 
 disp('The Euler angles (in radians) for each orientation are as follows:');
 eulZYZ
-
-
-
 
 
 

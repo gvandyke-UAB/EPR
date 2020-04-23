@@ -3,8 +3,9 @@ clear all;
 
 %%%%%%%%%%%%%%%%%%%% Cr %%%%%%%%%%%%%%%%%%%%
 
-center1 = 'Cr'; % name your EPR center for plotting
-theta = 0; % rotation angle, also used for plot labels
+center1 = 'Cr3+'; % name your EPR center for plotting
+theta = 90; % rotation angle, also used for plot labels
+
 
 %%%%%%%%%% Generate rotations about xL %%%%%%%%%%
 xL = [1;0;0]; % rotating about mw magnetic field (xL)
@@ -16,7 +17,7 @@ CrystalOri = rotatecrystal(CrystalOriStart,xL,rho);
 
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 3/2;
-Sys.g = [1.962 1.964 1.979];
+%Sys.g = [1.962 1.964 1.979];
 Sys.lwpp = 1.6;
 %Sys.D = [1535*3 1548];
 %Sys.DStrain = [100 20];
@@ -26,11 +27,11 @@ Sys.B2 = [1535 2668 1548 0 0]; % Extended Stevens parameters
 
 %%%%%%%%%% Experimental parameters %%%%%%%%%%
 Exp.Temperature = 298; 
-Exp.mwFreq = 9.4066;
+Exp.mwFreq = 9.504;
 Exp.Range = [0 1000];
-Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
+Exp.CrystalSymmetry = 'C2/m';  % assumes b-axis is yC
 Exp.nPoints = 1e4;
-Exp.CrystalOrientation = CrystalOri;
+Exp.CrystalOrientation = [0.0321 -1.3439 1.5708];
 %================================%
 
 

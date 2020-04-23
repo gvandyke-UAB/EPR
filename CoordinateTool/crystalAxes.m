@@ -26,21 +26,21 @@ classdef crystalAxes
         function adjustedAxes = adjustAxes(obj,axis,labAxis,angle)
             % Rotates a specified axis by angle (in degrees) about labAxis
             if strcmp(labAxis,'xL')
-                rotationMatrix = rotz(angle);
+                rotationMatrix = rotx(angle);
                 if strcmp(axis,'b')
                     obj.bAxisInitial = (rotationMatrix*obj.bAxisInitial.').';                   
                 elseif strcmp(axis,'c')
                     obj.cAxisInitial = (rotationMatrix*obj.cAxisInitial.').';                   
                 end
             elseif strcmp(labAxis,'yL')
-                rotationMatrix = rotx(angle);
+                rotationMatrix = roty(angle);
                 if strcmp(axis,'a')
                     obj.aAxisInitial = (rotationMatrix*obj.aAxisInitial.').';
                 elseif strcmp(axis,'c')
                     obj.cAxisInitial = (rotationMatrix*obj.cAxisInitial.').';                   
                 end
             elseif strcmp(labAxis,'zL')
-                rotationMatrix = roty(angle);
+                rotationMatrix = rotz(angle);
                 if strcmp(axis,'a')
                     obj.aAxisInitial = (rotationMatrix*obj.aAxisInitial.').';                  
                 elseif strcmp(axis,'b')
@@ -53,17 +53,17 @@ classdef crystalAxes
         function rotatedAxes = rotateAxes(obj,labAxis,angle)
             % rotates all 3 axes about labAxis by angle
             if strcmp(labAxis,'xL')
-                rotationMatrix = rotz(angle);
-                obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
-                obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
-                obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
-            elseif strcmp(labAxis,'yL')
                 rotationMatrix = rotx(angle);
                 obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
                 obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
                 obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
-            elseif strcmp(labAxis,'zL')
+            elseif strcmp(labAxis,'yL')
                 rotationMatrix = roty(angle);
+                obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
+                obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
+                obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
+            elseif strcmp(labAxis,'zL')
+                rotationMatrix = rotz(angle);
                 obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
                 obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
                 obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
@@ -74,7 +74,7 @@ classdef crystalAxes
         
         function showInitialAxesFigure(obj)
             % this function is written purely beause quiver3 is ridiculous
-            % and needs some preprocessing 
+            % and doesn't take in regular vector arguments
             
             close
             
@@ -83,8 +83,8 @@ classdef crystalAxes
             zCoordinates = [obj.aAxisInitial(3) obj.bAxisInitial(3) obj.cAxisInitial(3)];
             
             figure('NumberTitle', 'off', 'Name', 'Crystal Axes Euler Angle Tool');
-            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1);
-            xlabel('yL');ylabel('zL'),zlabel('xL');
+            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1.5);
+            xlabel('xL');ylabel('yL'),zlabel('zL');
             
             text(obj.aAxisInitial(1),obj.aAxisInitial(2),obj.aAxisInitial(3),'a-axis');
             text(obj.bAxisInitial(1),obj.bAxisInitial(2),obj.bAxisInitial(3),'b-axis');
@@ -106,8 +106,8 @@ classdef crystalAxes
             zCoordinates = [obj.aAxisFinal(3) obj.bAxisFinal(3) obj.cAxisFinal(3)];
             
             figure('NumberTitle', 'off', 'Name', 'Crystal Axes Euler Angle Tool');
-            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1);
-            xlabel('yL');ylabel('zL'),zlabel('xL');
+            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1.5);
+            xlabel('xL');ylabel('yL'),zlabel('zL');
             
             text(obj.aAxisFinal(1),obj.aAxisFinal(2),obj.aAxisFinal(3),'a-axis');
             text(obj.bAxisFinal(1),obj.bAxisFinal(2),obj.bAxisFinal(3),'b-axis');

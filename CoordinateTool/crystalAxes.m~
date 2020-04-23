@@ -39,21 +39,21 @@ classdef crystalAxes
                 end
             elseif strcmp(labAxis,'yL')
                 rotationMatrix = roty(angle);
-                if strcmp(axis,'a')                   
+                if strcmp(axis,'a')
+                    
                     obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
-                    obj.aAxisInitial = (rotationMatrix*obj.aAxisInitial.').';
-                elseif strcmp(axis,'c')                   
-                    obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';  
+                elseif strcmp(axis,'c')
                     obj.cAxisInitial = (rotationMatrix*obj.cAxisInitial.').';  
+                    obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';  
                 end
             elseif strcmp(labAxis,'zL')
                 rotationMatrix = rotz(angle);
-                if strcmp(axis,'a')                   
-                    obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
+                if strcmp(axis,'a')
                     obj.aAxisInitial = (rotationMatrix*obj.aAxisInitial.').';
-                elseif strcmp(axis,'b')                  
-                    obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
+                    obj.aAxisFinal = (rotationMatrix*obj.aAxisInitial.').';
+                elseif strcmp(axis,'b')
                     obj.bAxisInitial = (rotationMatrix*obj.bAxisInitial.').';
+                    obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
                 end
             end
            adjustedAxes = obj; 

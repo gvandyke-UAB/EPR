@@ -34,10 +34,10 @@ end
 
 % rotate whole crystal structure, keeping lab frame intact. You may stack
 % as many rotations here as you like
-%Crystal = Crystal.rotateAxes('zL',90);
-    % "I want to rotate the whole crystal about the zL axis 90 degrees"
-Crystal = Crystal.rotateAxes('yL',-13);
-    % "Now I want to rotate the whole crystal about the yL axis 90 degrees"
+Crystal = Crystal.rotateAxes('yL',103);
+    % "I want to rotate the whole crystal about the __ axis __ degrees"
+Crystal = Crystal.rotateAxes('xL',90);
+    % "Now I want to rotate the whole crystal about the __ axis __ degrees"
 
     
 % display 2

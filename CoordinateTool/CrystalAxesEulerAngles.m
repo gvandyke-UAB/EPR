@@ -7,9 +7,9 @@
 % crystal if you held it in your hand: your head isn't moving with the
 % crystal. This program achieves that same effect.
 
-% create crystal axis 
-Crystal = crystalAxes([0,0,1],[1,0,0],[0,1,0]); % a, b, c order of args
-    % to the computer, a is the z axis, b is the x axis, and c is the y
+% create crystal object
+Crystal = crystalAxes([0,0,1],[1,0,0],[0,1,0]); % a, b, c order of args.
+    % To the computer, a is the z axis, b is the x axis, and c is the y
     % axis. We rename these 'xL', 'yL', and 'zL', respectively. We do it
     % this way so the plots visually correspond to the experiental setup,
     % hopefully making this tool more intuitive.
@@ -23,6 +23,7 @@ Crystal.showInitialAxesFigure();
 
 % user confirmation
 if ~userConfirmation('Is the base crystal orientation correct? (y/n): ')
+    % if user says "n", stop program 
     return
 else
 end
@@ -32,13 +33,14 @@ end
 Crystal = Crystal.rotateAxes('zL',90);
     % "I want to rotate the whole crystal about the zL axis 90 degrees"
 Crystal = Crystal.rotateAxes('yL',90);
-    % "I want to rotate the whole crystal about the yL axis 90 degrees"
+    % "Now I want to rotate the whole crystal about the yL axis 90 degrees"
 
 % display 2
 Crystal.showFinalAxesFigure();
 
 % user confirmation
 if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
+    % if user says "n", stop program 
     return
 else
 end
@@ -47,8 +49,9 @@ end
 % crystal (display 1) to rotated crystal (display 2)
 eulZYZ = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
 
-% ask user if there will be rotation during experiment (does nothing yet)
+% ask user if there will be rotation during experiment
 if ~userCheckForRotation('Will the crystal rotate in the experiment? (y/n): ',eulZYZ)
+    % if user says "n", display Euler angles and stop program
     return
 else
 end
@@ -59,7 +62,7 @@ end
 % field for now, but further customization is possible.
 
 % ask user how many stops we'll be making
-N = input('How many spectra will we take between 0 and 180 degrees? (assuming evenly spaced intervals): ');
+N = input('How many spectra will be taken between 0 and 180 degrees? (assuming evenly spaced intervals): ');
 
 % angle step for each spectra
 angleChunk = 180/(N-1);

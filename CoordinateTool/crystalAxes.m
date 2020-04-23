@@ -98,7 +98,9 @@ classdef crystalAxes
             % and needs some preprocessing 
             
             close
-            
+            if isempty(obj.aAxisFinal)
+                showInitialAxesFigure(obj)
+            else
             xCoordinates = [obj.aAxisFinal(1) obj.bAxisFinal(1) obj.cAxisFinal(1)];
             yCoordinates = [obj.aAxisFinal(2) obj.bAxisFinal(2) obj.cAxisFinal(2)];
             zCoordinates = [obj.aAxisFinal(3) obj.bAxisFinal(3) obj.cAxisFinal(3)];
@@ -110,7 +112,7 @@ classdef crystalAxes
             text(obj.aAxisFinal(1),obj.aAxisFinal(2),obj.aAxisFinal(3),'a-axis');
             text(obj.bAxisFinal(1),obj.bAxisFinal(2),obj.bAxisFinal(3),'b-axis');
             text(obj.cAxisFinal(1),obj.cAxisFinal(2),obj.cAxisFinal(3),'c-axis');
-            
+            end
             
         end
             

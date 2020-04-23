@@ -4,7 +4,7 @@ clear all;
 %%%%%%%%%%%%%%%%%%%% Cr %%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Cr'; % name your EPR center for plotting
-theta = 90; % rotation angle, also used for plot labels
+theta = 0; % rotation angle, also used for plot labels
 
 %%%%%%%%%% Generate rotations about xL %%%%%%%%%%
 xL = [1;0;0]; % rotating about mw magnetic field (xL)

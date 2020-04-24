@@ -18,10 +18,10 @@ classdef crystalAxes
             % Constructs by assigning axes
             % User specifies row vectors to represent the three crystal axes
             
-            obj.aAxisInitial = aVector; 
+            obj.aAxisInitial = aVector;
             obj.bAxisInitial = bVector;
             obj.cAxisInitial = cVector;
-            obj.aAxisFinal = aVector; 
+            obj.aAxisFinal = aVector;
             obj.bAxisFinal = bVector;
             obj.cAxisFinal = cVector;
         end
@@ -32,7 +32,7 @@ classdef crystalAxes
                 rotationMatrix = rotx(angle);
                 if strcmp(axis,'b')
                     obj.bAxisFinal = (rotationMatrix*obj.bAxisInitial.').';
-                    obj.bAxisInitial = (rotationMatrix*obj.bAxisInitial.').';              
+                    obj.bAxisInitial = (rotationMatrix*obj.bAxisInitial.').';          
                 elseif strcmp(axis,'c')
                     obj.cAxisFinal = (rotationMatrix*obj.cAxisInitial.').';
                     obj.cAxisInitial = (rotationMatrix*obj.cAxisInitial.').';
@@ -99,6 +99,7 @@ classdef crystalAxes
             text(obj.bAxisInitial(1),obj.bAxisInitial(2),obj.bAxisInitial(3),'b-axis');
             text(obj.cAxisInitial(1),obj.cAxisInitial(2),obj.cAxisInitial(3),'c-axis');
             
+            view([127 30]);
             
         end
         
@@ -121,6 +122,9 @@ classdef crystalAxes
             text(obj.aAxisFinal(1),obj.aAxisFinal(2),obj.aAxisFinal(3),'a-axis');
             text(obj.bAxisFinal(1),obj.bAxisFinal(2),obj.bAxisFinal(3),'b-axis');
             text(obj.cAxisFinal(1),obj.cAxisFinal(2),obj.cAxisFinal(3),'c-axis');
+            
+            view([127 30]);
+            
             end
             
         end

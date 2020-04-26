@@ -70,29 +70,32 @@ end
 % experiment. We assume the rotations are about the microwave magnetic
 % field for now, but further customization is possible.
 
-% ask user how many stops we'll be making
-N = input('How many spectra will be taken between 0 and 180 degrees? (assuming evenly spaced intervals): ');
+% ask user for the size of the angle interval
+angleChunk = input('Step by how many degrees?: ');
 
 
 % angle step for each spectra
-angleChunk = 180/(N-1);
-
+numberOfSteps = 180/angleChunk;
+round(numberOfSteps);
 
 % preallocate space in eulZYZ
-eulZYZ = [eulZYZ;zeros(N-1,3)];
+eulZYZ = [eulZYZ;zeros(numberOfSteps,3)];
 
 
-for i = 2:N
+for i = 1:(numberOfSteps+1)
     
     Crystal = Crystal.rotateAxes('xL',angleChunk);
         % the hard-coded "xL" here is me assuming the rotation will be
         % about the microwave magnetic field
+        
+    % uncomment these to see a crude animation of the crystal rotating    
+    %Crystal.showFinalAxesFigure();
+    %pause(.7);
     
     eulZYZ(i,:) = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
         % index starts at 2 bc eulZYZ already has one row filled
         
 end
-
 
 disp('The Euler angles (in radians) for each orientation are as follows:');
 eulZYZ

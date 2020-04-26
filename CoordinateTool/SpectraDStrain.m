@@ -1,6 +1,5 @@
 
-clear all;
-
+clear Sys;
 %%%%%%%%%%%%%%%%%%%% Cr %%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Cr3+'; % name your EPR center for plotting
@@ -16,7 +15,7 @@ CrystalOri = rotatecrystal(CrystalOriStart,xL,rho);
 
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 3/2;
-%Sys.g = [1.962 1.964 1.979];
+Sys.g = [1.962 1.964 1.979];
 Sys.lwpp = 1.6;
 %Sys.D = [1535*3 1548];
 %Sys.DStrain = [100 20];

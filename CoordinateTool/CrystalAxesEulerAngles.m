@@ -15,7 +15,7 @@ Crystal = crystalAxes([1,0,0],[0,1,0],[0,0,1]); % a, b, c order of args.
 
     
 % set orientation of axes relative to each other (beta angle adjustment)
-Crystal = Crystal.adjustAxes('c','yL',-13);
+Crystal = Crystal.adjustAxis('c','yL',-13);
     % "I want to rotate the current c-axis about the 'yL' axis -13 degrees"
     % Now it's a monoclinic crystal structure
 

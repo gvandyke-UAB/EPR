@@ -26,7 +26,7 @@ classdef crystalAxes
             obj.cAxisFinal = cVector;
         end
         
-        function adjustedAxes = adjustAxes(obj,axis,labAxis,angle)
+        function adjustedAxes = adjustAxis(obj,axis,labAxis,angle)
             % Rotates a specified axis by angle (in degrees) about labAxis
             if strcmp(labAxis,'xL')
                 rotationMatrix = rotx(angle);

@@ -31,31 +31,45 @@ if ~userConfirmation('Is the base crystal orientation correct? (y/n): ')
 else
 end
 
-
-% rotate whole crystal structure, keeping lab frame intact. You may stack
-% as many rotations here as you like
-Crystal = Crystal.rotateAxes('yL',103);
-    % "I want to rotate the whole crystal about the __ axis __ degrees"
-Crystal = Crystal.rotateAxes('xL',90);
-    % "Now I want to rotate the whole crystal about the __ axis __ degrees"
-
+% while loop asks user for rotation axis and angle
+done = true;
+while done
     
-% display 2
-Crystal.showFinalAxesFigure();
+    % ask user
+    labAxis = input('Rotate about which lab axis? (xL, yL, or zL): ','s');
+    angle = input('By how many degrees?: ');
 
-
-% user confirmation
-if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
+    % perform rotation
+    Crystal = Crystal.rotateAxes(labAxis,angle);
+    
+    % display new crystal orientation
+    Crystal.showFinalAxesFigure();
+    
+    % check if correct/more rotations necessary
+    if ~userConfirmation('Is the rotated crystal orientation correct? (y/n): ')
     % if user says "n", stop program 
-    return
-else
-end
+        return
+    else
+    % if user says "y", ask to do another rotation
+        if ~askRotateAgain('Perform another rotation? (y/n): ')
+        % if user says "n", terminate while loop
+            done = false;
+        end
+        
+    end
 
+end
 
 % returns the Euler angles (ready for EasySpin) for transforming original
 % crystal (display 1) to rotated crystal (display 2)
 eulZYZ = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
 
+eulZYZ
+
+
+
+%%%%%%%%%%% This section deals with rotations in the experiment %%%%%%%%%%%
+%{
 
 % ask user if there will be rotation during experiment
 if ~userCheckForRotation('Will the crystal rotate in the experiment? (y/n): ',eulZYZ)
@@ -89,10 +103,10 @@ for i = 1:(numberOfSteps+1)
         % about the microwave magnetic field
         
     % uncomment these to see a crude animation of the crystal rotating    
-    %Crystal.showFinalAxesFigure();
-    %pause(.7);
+    Crystal.showFinalAxesFigure();
+    pause(.7);
     
-    eulZYZ(i,:) = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
+    eulZYZ(i+1,:) = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
         % index starts at 2 bc eulZYZ already has one row filled
         
 end
@@ -100,6 +114,7 @@ end
 disp('The Euler angles (in radians) for each orientation are as follows:');
 eulZYZ
 
+%}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,12 +124,12 @@ eulZYZ
 function feedback = userConfirmation(question)
 
 correct = input(question,'s');
-if correct == 'n'
+if strcmp(correct,'n')
     disp('Ending program, re-check input.');
     feedback = false;
-elseif correct ~= 'y'
+elseif ~strcmp(correct,'y')
     disp('I need confirmation in either a "y" or an "n".');
-    feedback = userConfirmation();
+    feedback = userConfirmation(question);
 else
     feedback = true;
 end
@@ -124,12 +139,28 @@ end
 function feedback = userCheckForRotation(question,EulerAngles)
 
 correct = input(question,'s');
-if correct == 'n'
+if strcmp(correct,'n')
     disp(horzcat('The Euler angles (in radians) for your orientation are: ',mat2str(EulerAngles)));
     feedback = false;
-elseif correct ~= 'y'
+elseif ~strcmp(correct,'y')
     disp('I need confirmation in either a "y" or an "n".');
     feedback = userCheckForRotation(question,EulerAngles);
+else
+    feedback = true;
+end
+
+end
+
+function feedback = askRotateAgain(question)
+
+correct = input(question,'s');
+if strcmp(correct,'n')
+    disp('Ending program, displaying Euler angles in radians.');
+    feedback = false;
+    return
+elseif ~strcmp(correct,'y')
+    disp('I need confirmation in either a "y" or an "n".');
+    feedback = askRotateAgain(question);
 else
     feedback = true;
 end

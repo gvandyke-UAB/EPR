@@ -3,12 +3,13 @@ clear Sys;
 clear Exp;
 clear Opt;
 
-%%%%%%%%%%%%%%%%%%%% Cr %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cr3+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Cr3+'; % name your EPR center for plotting
-ang = 0; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
-         % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
-         % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
+startang = 0; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
+              % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
+              % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
+stopang = startang + 180;
 
 
 %%%%%%%%%% Generate rotations about xL %%%%%%%%%%
@@ -22,7 +23,7 @@ xL = [1 0 0];
 CrystalOriStart = [0 0 -90] * pi/180;
 
 % angle of rotation: number (for spectra) or row of numbers (for stackplot)
-rho = ang * pi/180; % startang to stopang in steps of 2 degrees
+rho = (startang:2:stopang) * pi/180; % startang to stopang in steps of 2 degrees
 
 % generate Euler angles for each rotation of 2 degrees
 CrystalOri = rotatecrystal(CrystalOriStart,xL,rho);
@@ -32,14 +33,14 @@ CrystalOri = rotatecrystal(CrystalOriStart,xL,rho);
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 3/2;
 Sys.g = [1.962 1.964 1.979];
-Sys.lwpp = 1.6;
+Sys.lwpp = 1.6; % EasySpin uses this in stackplots/spectra
 Sys.DStrain = [100 200]; % sample dependent
 Sys.B2 = [-3*1535 -3*2668 -3*1548 0 0]; % Extended Stevens parameters
 %================================%
 
 
 %%%%%%%%%% Experimental parameters %%%%%%%%%%
-Exp.Temperature = 298; % 
+Exp.Temperature = 298;
 Exp.mwFreq = 9.504;
 Exp.Range = [0 1500];
 Exp.CrystalSymmetry = 'C2/m';  % assumes b-axis is yC
@@ -53,13 +54,13 @@ Opt.Output = 'separate';  % make sure spectra are not added up
 %================================%
 
 
-%%%%%%%%%% Simulate spectra %%%%%%%%%%
+%%%%%%%%%% Simulate and plot spectra %%%%%%%%%%
 figure;
-set(gcf, 'Name','EasySpin Spectrum Simulation','numbertitle','off');
+set(gcf, 'Name','EasySpin Stackplot Simulation','numbertitle','off');
 [B, spec1] = pepper(Sys,Exp,Opt);
-plot(B, spec1);
+stackplot(B, spec1);
 hold on;
-title(strcat(center1,{' '},'Spectrum',{' '}, 'at',{' '},int2str(ang),{' '},'degrees'));
+title(strcat(center1,{' '},'StackPlot',{' '}, 'from',{' '},int2str(startang),{' '},'to',{' '},int2str(stopang),{' '},'degrees'));
 xlabel('Magnetic Field (mT)');
 ylabel('Intensity');
 %================================%

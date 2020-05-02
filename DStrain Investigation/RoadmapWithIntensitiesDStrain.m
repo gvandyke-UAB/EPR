@@ -1,11 +1,10 @@
 
 % This file generates a roadmap with a third axis representing relative
-% intensity. General structure is: define Sys, Exp, and Opt, generate data,
-% normalize, plot
+% intensity.
 
-
-clear all;
-clf % clears all variables and figures
+clear Sys;
+clear Exp;
+clear Opt;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cr3+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

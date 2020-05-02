@@ -1,4 +1,6 @@
 
+% This file generates a spectrum at a specified angle.
+
 clear Sys;
 clear Exp;
 clear Opt;

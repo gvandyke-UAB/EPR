@@ -5,6 +5,7 @@ clear Opt;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cr3+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 center1 = 'Cr3+'; % name your EPR center for plotting
 startAng = 0; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
               % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0

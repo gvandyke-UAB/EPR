@@ -1,4 +1,3 @@
-
 % This file generates a roadmap with a third axis representing relative
 % intensity. General structure is: define Sys, Exp, and Opt, generate data,
 % normalize, plot
@@ -7,38 +6,28 @@
 clear all;
 clf % clears all variables and figures
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cr3+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Name your EPR centers here, used for plot formatting later
+center1 = 'Cr3+';
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cr3+ lines %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-center1 = 'Cr3+'; % name your EPR center for plotting
-startAng = 0; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
-              % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
-              % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
-stopAng = startAng + 180;
-
-
-%%%%%%%%%% Generate rotations about xL %%%%%%%%%%
-% define axis of rotation as xL
-xL = [1 0 0];
-
-% Euler angles for crystal starting orientation
-    % a*b plane [0 103 0] or [0 -77 0] geometrically, but fits Yeom with [0 84 0]
-    % bc* plane [0 0 0]
-    % ac*/ac plane [0 0 -90], cannot be [0 0 90] bc (+)b//B_1
-crystalOriStart = [0 0 -90] * pi/180;
-
-% angle of rotation: number (for spectra) or row of numbers (for stackplot)
-rho = (startAng:2:stopAng) * pi/180; % startang to stopang in steps of 2 degrees
-
-% generate Euler angles for each rotation of 2 degrees
-crystalOri = rotatecrystal(crystalOriStart,xL,rho);
+%%%%%%%%%% Generate rotations about nL %%%%%%%%%%
+nL = [1;0;0]; % rotating about mW magnetic field
+cori0 = [0 102 0] * pi/180; % align vertical of sample with mw Field
+rho = (90:3:270) * pi/180; % 90 deg is 0 deg in our experiment i.e. B_0//b
+cori = rotatecrystal(cori0,nL,rho);
 %================================%
 
 
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 3/2;
-Sys.g = [1.962 1.964 1.979];   
-Sys.B2 = [-3*1535 -3*2668 -3*1548 0 0];
+Sys.g = [1.968 0 -.008;...
+         0 1.964 0;...
+         -.008 0 1.973];
+     
+%Sys.D = [3*1548 1288];
+
+Sys.B2 = [1535 2668 1548 0 0];
 %================================%
 
 
@@ -53,7 +42,7 @@ Exp.mwFreq = 9.504;
 Exp.Range = [0 1500];
 Exp.CrystalSymmetry = 'C2/m';  % assumes 'b' is yC
 Exp.nPoints = 1e4;
-Exp.CrystalOrientation = crystalOri;
+Exp.CrystalOrientation = cori;
 %================================%
 
 
@@ -67,6 +56,7 @@ angCr = rho * 180/pi - 90;
 setToOne = max(IntCr,[],'all'); % find which value to regard as our "1"
 normalizedIntFe1 = IntCr / setToOne;
 %================================%
+
 
 
 %%%%%%%%%% Plotting %%%%%%%%%%

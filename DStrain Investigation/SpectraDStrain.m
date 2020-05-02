@@ -3,13 +3,14 @@ clear Sys;
 clear Exp;
 clear Opt;
 
-%%%%%%%%%%%%%%%%%%%% Cr %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cr3+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 center1 = 'Cr3+'; % name your EPR center for plotting
 ang = 0; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
          % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
          % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
-
+         
 
 %%%%%%%%%% Generate rotations about xL %%%%%%%%%%
 % define axis of rotation as xL

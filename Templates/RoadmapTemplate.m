@@ -4,16 +4,31 @@
 
 clear, clf % clears all variables and figures
 
-center1 = 'Fe3+';
-center2 = 'Cr';
 %%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%
 
+center1 = 'Fe3+';
+center2 = 'Cr3+';
+startAng = 90; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
+               % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
+               % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
+stopAng = startAng + 180;
 
-%%%%%%%%%% Generate rotations about nL %%%%%%%%%%
-nL = [1;0;0]; % rotating about mW magnetic field
-cori0 = [0 102 0] * pi/180; 
-rho = (90:2:270) * pi/180;
-cori = rotatecrystal(cori0,nL,rho);
+
+%%%%%%%%%% Generate rotations about xL %%%%%%%%%%
+% define axis of rotation as xL
+xL = [1 0 0];
+
+% Euler angles for crystal starting orientation
+    % a*b plane [0 103 0] or [0 -77 0] geometrically, but fits Yeom with [0 84 0]
+    % bc* plane [0 0 0]
+    % ac*/ac plane [0 0 -90], cannot be [0 0 90] bc (+)b//B_1
+crystalOriStart = [0 0 -90] * pi/180;
+
+% angle of rotation: number (for spectra) or row of numbers (for stackplot)
+rho = (startAng:2:stopAng) * pi/180; % startang to stopang in steps of 2 degrees
+
+% generate Euler angles for each rotation of 2 degrees
+crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 %================================%
 
 
@@ -29,8 +44,8 @@ Sys.lwpp = 1.6;
 Exp.mwFreq = 9.4066;
 Exp.Range = [50 1100];
 Exp.Temperature = 298;
-Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
-Exp.CrystalOrientation = cori; % this Exp paramenter must be defined after cori
+Exp.CrystalSymmetry = 'C2/m'; % Assumes 'b' is yC
+Exp.CrystalOrientation = crystalOri;
 %================================%
 
 

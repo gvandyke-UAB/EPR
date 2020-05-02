@@ -19,13 +19,13 @@ xL = [1 0 0];
     % a*b plane [0 103 0] or [0 -77 0] geometrically, but fits Yeom with [0 84 0]
     % bc* plane [0 0 0]
     % ac*/ac plane [0 0 -90], cannot be [0 0 90] bc (+)b//B_1
-CrystalOriStart = [0 0 -90] * pi/180;
+crystalOriStart = [0 0 -90] * pi/180;
 
 % angle of rotation: number (for spectra) or row of numbers (for stackplot)
 rho = ang * pi/180; % startang to stopang in steps of 2 degrees
 
 % generate Euler angles for each rotation of 2 degrees
-CrystalOri = rotatecrystal(CrystalOriStart,xL,rho);
+crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 %================================%
 
 
@@ -44,7 +44,7 @@ Exp.mwFreq = 9.504;
 Exp.Range = [0 1500];
 Exp.CrystalSymmetry = 'C2/m';  % assumes b-axis is yC
 Exp.nPoints = 1e4;
-Exp.CrystalOrientation = CrystalOri;
+Exp.CrystalOrientation = crystalOri;
 %================================%
 
 

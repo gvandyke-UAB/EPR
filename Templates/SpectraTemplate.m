@@ -1,15 +1,29 @@
 
+clear Sys;
+clear Exp;
+clear Opt;
+
 %%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Fe3+'; % name your EPR center for plotting
+ang = 90;
 
-% Octahedral
 
-%%%%%%%%%% Generate rotations about nL %%%%%%%%%%
-nL = [1;0;0]; % rotating about mW magnetic field
-cori0 = [0 102 0]*pi/180; % align vertical of sample with mw Field
-rho = (90)*pi/180; % 90 deg is 0 deg in our expt ie B//b
-cori = rotatecrystal(cori0,nL,rho);
+%%%%%%%%%% Generate rotations about xL %%%%%%%%%%
+% define axis of rotation as xL
+xL = [1 0 0];
+
+% Euler angles for crystal starting orientation
+    % a*b plane [0 103 0] or [0 -77 0] geometrically, but fits Yeom with [0 84 0]
+    % bc* plane [0 0 0]
+    % ac*/ac plane [0 0 -90], cannot be [0 0 90] bc (+)b//B_1
+crystalOriStart = [0 0 -90] * pi/180;
+
+% angle of rotation: number (for spectra) or row of numbers (for stackplot)
+rho = ang * pi/180; % startang to stopang in steps of 2 degrees
+
+% generate Euler angles for each rotation of 2 degrees
+crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 %================================%
 
 
@@ -26,7 +40,7 @@ Exp.mwFreq = 9.4066;
 Exp.Range = [50 1100];
 Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
 Exp.nPoints = 1e4;
-Exp.CrystalOrientation = cori;
+Exp.CrystalOrientation = crystalOri;
 %================================%
 
 
@@ -39,7 +53,7 @@ Opt.Output = 'separate';  % make sure spectra are not added up
 pepper(Sys,Exp,Opt); % this pepper call plots
 
 set(gcf, 'Name','Spectrum EasySpin Simulation','numbertitle','off');
-title(strcat(center1,{' '},'Spectrum'));
+title(strcat(center1,{' '},'Spectrum',{' '},'at',{' '},int2str(ang),{' '},'degrees'));
 
 [B,spec] = pepper(Sys,Exp,Opt); % this pepper call stores values so we can write them to a .txt file
 %================================%

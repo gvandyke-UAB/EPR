@@ -9,7 +9,7 @@ clear Opt;
 
 
 center1 = 'Cr3+'; % name your EPR center for plotting
-startAng = -30; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
+startAng = 90; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
               % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
               % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
 stopAng = startAng + 180;
@@ -67,6 +67,6 @@ title(strcat(center1,{' '},'StackPlot',{' '}, 'from',{' '},int2str(startAng),{' 
 xlabel('Magnetic Field (mT)');
 ylabel('Intensity');
 yticks([1 46 91]);
-yticklabels({'0','90','180'})
+yticklabels({int2str(startAng),int2str(stopAng/2),int2str(stopAng)})
 %================================%
 

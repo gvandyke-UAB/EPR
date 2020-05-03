@@ -103,8 +103,8 @@ for i = 1:(numberOfSteps+1)
         % about the microwave magnetic field
         
     % uncomment these to see a crude animation of the crystal rotating    
-    Crystal.showFinalAxesFigure();
-    pause(.7);
+    %Crystal.showFinalAxesFigure();
+    %pause(.7);
     
     eulZYZ(i+1,:) = rotm2eul(Crystal.completeRotationMatrix,'ZYZ');
         % index starts at 2 bc eulZYZ already has one row filled
@@ -115,6 +115,7 @@ disp('The Euler angles (in radians) for each orientation are as follows:');
 eulZYZ
 
 %}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

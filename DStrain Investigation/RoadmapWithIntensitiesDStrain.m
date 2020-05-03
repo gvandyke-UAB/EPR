@@ -69,11 +69,11 @@ normalizedIntFe1 = IntCr / setToOne;
 
 
 %%%%%%%%%% Plotting %%%%%%%%%%
-set(gcf, 'Name','Roadmap + Intensities EasySpin Simulation','numbertitle','off');
+set(gcf, 'Name','EasySpin Roadmap + Intensities Simulation','numbertitle','off');
 plot3(BresCr, angCr, normalizedIntFe1,'k','linewidth',2,'DisplayName',center1); % black traces
 hold on;
 legend
-title(strcat('Roadmap + Intensities for',{' '},center1,{' '}));
+title(strcat('Roadmap + Intensities for',{' '},center1));
 xlabel('Magnetic Field (mT)');
 ylabel('Angle of rotation (°)');
 zlabel('Relative Intensity (a.u.)');

@@ -36,7 +36,7 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 Sys.S = 3/2;
 Sys.g = [1.962 1.964 1.979];
 Sys.lwpp = 1.6;
-Sys.DStrain = [100 200]; % sample dependent
+%Sys.DStrain = [100 200]; % sample dependent
 Sys.B2 = [-3*1535 -3*2668 -3*1548 0 0]; % Extended Stevens parameters
 %================================%
 

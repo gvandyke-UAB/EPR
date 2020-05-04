@@ -92,17 +92,21 @@ classdef crystalAxes
             zCoordinates = [obj.aAxisInitial(3) obj.bAxisInitial(3) obj.cAxisInitial(3)];
             
             figure('NumberTitle', 'off', 'Name', 'Crystal Axes Euler Angle Tool');
-            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1.5);
+            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1.8);
+            hold on;
+            quiver3([0,0],[0,0],[0,0],[0,1.5],[0,0],[1.5,0],'LineWidth',.9);
             xlabel('xL (Microwave Field)');ylabel('yL'),zlabel('zL (Static Field)');
             
             text(obj.aAxisInitial(1),obj.aAxisInitial(2),obj.aAxisInitial(3),'a-axis');
             text(obj.bAxisInitial(1),obj.bAxisInitial(2),obj.bAxisInitial(3),'b-axis');
             text(obj.cAxisInitial(1),obj.cAxisInitial(2),obj.cAxisInitial(3),'c-axis');
+            text(0,0,1.5,'B_0');
+            text(1.5,0,0,'B_1');
             
             view([127 30]);
-            xlim([-1 1]);
-            ylim([-1 1]);
-            zlim([-1 1]);
+            xlim([-1 1.5]);
+            ylim([-1 1.5]);
+            zlim([-1 1.5]);
             
         end
         
@@ -119,17 +123,21 @@ classdef crystalAxes
             zCoordinates = [obj.aAxisFinal(3) obj.bAxisFinal(3) obj.cAxisFinal(3)];
             
             figure('NumberTitle', 'off', 'Name', 'Crystal Axes Euler Angle Tool');
-            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1.5);
+            quiver3([0,0,0],[0,0,0],[0,0,0],xCoordinates,yCoordinates,zCoordinates,'LineWidth',1.8);
+            hold on;
+            quiver3([0,0],[0,0],[0,0],[0,1.5],[0,0],[1.5,0],'LineWidth',.9);
             xlabel('xL (Microwave Field)');ylabel('yL'),zlabel('zL (Static Field)');
             
             text(obj.aAxisFinal(1),obj.aAxisFinal(2),obj.aAxisFinal(3),'a-axis');
             text(obj.bAxisFinal(1),obj.bAxisFinal(2),obj.bAxisFinal(3),'b-axis');
             text(obj.cAxisFinal(1),obj.cAxisFinal(2),obj.cAxisFinal(3),'c-axis');
+            text(0,0,1.5,'B_0');
+            text(1.5,0,0,'B_1');
             
             view([127 30]);
-            xlim([-1 1]);
-            ylim([-1 1]);
-            zlim([-1 1]);
+            xlim([-1 1.5]);
+            ylim([-1 1.5]);
+            zlim([-1 1.5]);
             
             end
             

@@ -1,6 +1,7 @@
 
 % This file generates a stackplot in a specified angle range.
 
+clf;
 clear Sys;
 clear Exp;
 clear Opt;
@@ -9,7 +10,7 @@ clear Opt;
 
 
 center1 = 'Cr3+'; % name your EPR center for plotting
-startAng = -30; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
+startAng = 90; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
               % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
               % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
 stopAng = startAng + 180;
@@ -36,17 +37,17 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 3/2;
 Sys.g = [1.962 1.964 1.979];
-Sys.lwpp = 1.6; % EasySpin uses this in stackplots/spectra
-%Sys.DStrain = [100 90]; % sample dependent
+Sys.lwpp = 1.6;
+%Sys.DStrain = [100 200]; % sample dependent
 Sys.B2 = [-3*1535 -3*2668 -3*1548 0 0]; % Extended Stevens parameters
 %================================%
 
 
 %%%%%%%%%% Experimental parameters %%%%%%%%%%
-Exp.Temperature = 298;
+Exp.Temperature = 298; 
 Exp.mwFreq = 9.504;
 Exp.Range = [0 1500];
-Exp.CrystalSymmetry = 'C2/m';  % assumes b-axis is yC
+Exp.CrystalSymmetry = 'C2/m';  % assumes 'b' is yC
 Exp.nPoints = 1e4;
 Exp.CrystalOrientation = crystalOri;
 %================================%
@@ -58,7 +59,6 @@ Opt.Output = 'separate';  % make sure spectra are not added up
 
 
 %%%%%%%%%% Simulate and plot spectra %%%%%%%%%%
-figure;
 set(gcf, 'Name','EasySpin Stackplot Simulation','numbertitle','off');
 [B, spec1] = pepper(Sys,Exp,Opt);
 stackplot(B, spec1);

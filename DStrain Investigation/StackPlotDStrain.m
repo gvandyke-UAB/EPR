@@ -10,9 +10,9 @@ clear Opt;
 
 
 center1 = 'Cr3+'; % name your EPR center for plotting
-startAng = 90; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
-              % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
-              % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
+startAng = 0; % for a*b plane [90 90 13], 0 makes b//B_0
+              % for bc* plane [90 90 -90], 0 makes b//B_0
+              % for ac*/ac plane [0 0 -90], 0 makes c*//B_0
 stopAng = startAng + 180;
 
 
@@ -21,10 +21,10 @@ stopAng = startAng + 180;
 xL = [1 0 0];
 
 % Euler angles for crystal starting orientation
-    % a*b plane [0 103 0] or [0 -77 0] geometrically, but fits Yeom with [0 84 0]
-    % bc* plane [0 0 0]
-    % ac*/ac plane [0 0 -90], cannot be [0 0 90] bc (+)b//B_1
-crystalOriStart = [0 84 0] * pi/180; % delete conversion factor if directly importing
+    % a*b plane [90 90 13] geometrically, but fits Yeom with [0 -77 0]
+    % bc* plane [90 90 -90]
+    % ac*/ac plane [0 0 -90]
+crystalOriStart = [0 0 -90] * pi/180; % delete conversion factor if directly importing
 
 % angle of rotation: number (for spectra) or row of numbers (for stackplot)
 rho = (startAng:2:stopAng) * pi/180; % startang to stopang in steps of 2 degrees
@@ -38,7 +38,7 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 Sys.S = 3/2;
 Sys.g = [1.962 1.964 1.979];
 Sys.lwpp = 1.6;
-%Sys.DStrain = [100 200]; % sample dependent
+Sys.DStrain = [100 200]; % sample dependent
 Sys.B2 = [-3*1535 -3*2668 -3*1548 0 0]; % Extended Stevens parameters
 %================================%
 

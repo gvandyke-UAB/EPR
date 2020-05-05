@@ -13,7 +13,7 @@ Crystal = crystalAxes([1,0,0],[0,1,0],[0,0,1]); % a, b, c order of args.
     % Sets a-axis as the x unit vector, b-axis as y unit vector, c-axis as
     % z unit vector. So it's not a monoclinic crystal yet.
 
-    
+
 % set orientation of axes relative to each other (beta angle adjustment)
 Crystal = Crystal.adjustAxis('c','yL',-13);
     % "I want to rotate the current c-axis about the 'yL' axis -13 degrees"

@@ -1,6 +1,7 @@
 
 % This script generates roadmap plots and outputs a CSV .txt file with the
-% roadmap data
+% roadmap data. Rotation comments are for gallium oxide crystal structure.
+
 
 clear, clf % clears all variables and figures
 
@@ -8,9 +9,9 @@ clear, clf % clears all variables and figures
 
 center1 = 'Fe3+';
 center2 = 'Cr3+';
-startAng = 90; % for a*b plane [0 103 0], 0 makes -a*//B_0, 90 makes b//B_0
-               % for bc* plane [0 0 0], 0 makes c*//B_0, 90 makes b//B_0
-               % for ac*/ac plane [0 0 -90], 0 makes c*//B_0, -90 makes a//B_0
+startAng = 0; % for a*b plane [90 90 13], 0 makes b//B_0
+               % for bc* plane [90 90 -90], 0 makes b//B_0
+               % for ac*/ac plane [0 0 -90], 0 makes c*//B_0
 stopAng = startAng + 180;
 
 
@@ -19,13 +20,13 @@ stopAng = startAng + 180;
 xL = [1 0 0];
 
 % Euler angles for crystal starting orientation
-    % a*b plane [0 103 0] or [0 -77 0] geometrically, but fits Yeom with [0 84 0]
-    % bc* plane [0 0 0]
-    % ac*/ac plane [0 0 -90], cannot be [0 0 90] bc (+)b//B_1
-crystalOriStart = [0 0 -90] * pi/180;
+    % a*b plane [90 90 13]
+    % bc* plane [90 90 -90]
+    % ac*/ac plane [0 0 -90]
+crystalOriStart = [90 90 13] * pi/180;
 
 % angle of rotation: number (for spectra) or row of numbers (for stackplot)
-rho = (startAng:2:stopAng) * pi/180; % startang to stopang in steps of 2 degrees
+rho = (startAng:2:stopAng) * pi/180; % startAng to stopAng in steps of 2 degrees
 
 % generate Euler angles for each rotation of 2 degrees
 crystalOri = rotatecrystal(crystalOriStart,xL,rho);
@@ -60,7 +61,7 @@ BresCr = resfields(Sys,Exp,Opt);
 
 
 %%%%%%%%%% Plotting %%%%%%%%%%
-plot(BresCr*10,rho * 180/pi - 90,'linewidth',3,'color','b'); % blue traces
+plot(BresCr*10,rho * 180/pi,'linewidth',3,'color','b','DisplayName',center2); % blue traces
 xlabel('Magnetic Field (mT)');
 ylabel('Angle (°)');
 hold on % keeps previous plots displayed
@@ -77,6 +78,12 @@ pointsCr = makeResfieldsCSVtxt(BresCr, rho, 'BresCr');
 %%%%%%% for the roadmap you'd like to overlay %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%%%%%%%%% Generate rotations about xL %%%%%%%%%%
+% Euler angles are already calculated up top
+%================================%
+
+
 %%%%%%%%%% Spin parameters %%%%%%%%%%
 Sys.S = 5/2;
 Sys.g= [2.004 2.002 2.007];
@@ -86,15 +93,16 @@ Sys.D = [3*5385 3*1288];
 
 %%%%%%%%%% Generate B field roadmap data %%%%%%%%%%
 BresFe = resfields(Sys,Exp,Opt);
-ang = rho * 180/pi - 90;
+ang = rho * 180/pi;
 %================================%
 
 
 %%%%%%%%%% Plotting %%%%%%%%%%
-plot(BresFe*10,ang,'linewidth',3,'color','k'); % black traces
+plot(BresFe*10,ang,'linewidth',3,'color','k','DisplayName',center1); % black traces
 
-set(gcf, 'Name','Roadmap EasySpin Simulation','numbertitle','off');
-title(strcat('Roadmap + Intensities for',{' '}, center1,{' '}, 'and',{' '}, center2));
+set(gcf, 'Name','EasySpin Roadmap Simulation','numbertitle','off');
+title(strcat('Roadmap for',{' '}, center1,{' '}, 'and',{' '}, center2));
+legend;
 %================================%
 
 

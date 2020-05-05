@@ -24,10 +24,10 @@ xL = [1 0 0];
     % a*b plane [90 90 13] geometrically, but fits Yeom with [0 -77 0]
     % bc* plane [90 90 -90]
     % ac*/ac plane [0 0 -90]
-crystalOriStart = [0 0 -90] * pi/180; % delete conversion factor if directly importing
+crystalOriStart = [0 0 -90] * pi/180;
 
 % angle of rotation: number (for spectra) or row of numbers (for stackplot)
-rho = (startAng:2:stopAng) * pi/180; % startang to stopang in steps of 2 degrees
+rho = (startAng:2:stopAng) * pi/180; % startAng to stopAng in steps of 2 degrees
 
 % generate Euler angles for each rotation of 2 degrees
 crystalOri = rotatecrystal(crystalOriStart,xL,rho);

@@ -1,12 +1,18 @@
 
+% This script generates a spectrum at a single angle.
+% Rotation comments are for gallium oxide crystal structure.
+
 clear Sys;
 clear Exp;
 clear Opt;
+clf;
 
-%%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Fe3+'; % name your EPR center for plotting
-ang = 90;
+ang = 0; % for a*b plane [90 90 13], 0 makes b//B_0
+          % for bc* plane [90 90 -90], 0 makes b//B_0
+          % for ac*/ac plane [0 0 -90], 0 makes c*//B_0
 
 
 %%%%%%%%%% Generate rotations about xL %%%%%%%%%%
@@ -14,13 +20,13 @@ ang = 90;
 xL = [1 0 0];
 
 % Euler angles for crystal starting orientation
-    % a*b plane [0 103 0] or [0 -77 0] geometrically, but fits Yeom with [0 84 0]
-    % bc* plane [0 0 0]
-    % ac*/ac plane [0 0 -90], cannot be [0 0 90] bc (+)b//B_1
-crystalOriStart = [0 0 -90] * pi/180;
+    % a*b plane [90 90 13]
+    % bc* plane [90 90 -90]
+    % ac*/ac plane [0 0 -90]
+crystalOriStart = [90 90 -13] * pi/180;
 
-% angle of rotation: number (for spectra) or row of numbers (for stackplot)
-rho = ang * pi/180; % startang to stopang in steps of 2 degrees
+% angle of rotation
+rho = ang * pi/180;
 
 % generate Euler angles for each rotation of 2 degrees
 crystalOri = rotatecrystal(crystalOriStart,xL,rho);
@@ -61,5 +67,5 @@ title(strcat(center1,{' '},'Spectrum',{' '},'at',{' '},int2str(ang),{' '},'degre
 
 %%%%%%%%%% Save data to .txt %%%%%%%%%%
 data = [B(:)*10 spec(:)*8000]; % B(:)*10 converts from mT to G
-save('GaOFespc_90D.txt','data','-ascii');
+save('GaOFespc_0D.txt','data','-ascii');
 %================================%

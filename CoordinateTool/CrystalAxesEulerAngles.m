@@ -69,7 +69,7 @@ eulZYZ
 
 
 %%%%%%%%%%% This section deals with rotations in the experiment %%%%%%%%%%%
-%{
+
 
 % ask user if there will be rotation during experiment
 if ~userCheckForRotation('Will the crystal rotate in the experiment? (y/n): ',eulZYZ)

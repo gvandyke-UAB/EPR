@@ -23,7 +23,7 @@ xL = [1 0 0];
     % a*b plane [90 90 13]
     % bc* plane [90 90 -90]
     % ac*/ac plane [0 0 -90]
-crystalOriStart = [90 90 13] * pi/180;
+crystalOriStart = [90 90 13] * pi/180; % [zL yL zL] not [zC y'C z''C]
 
 % angle of rotation: number (for spectra) or row of numbers (for stackplot)
 rho = (startAng:2:stopAng) * pi/180; % startAng to stopAng in steps of 2 degrees

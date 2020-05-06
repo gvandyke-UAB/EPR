@@ -11,7 +11,7 @@ clf;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-center1 = 'Cr3+'; % name your EPR center for plotting
+center1 = 'Fe3+'; % name your EPR center for plotting
 startAng = 0; % for a*b plane [90 90 13], 0 makes b//B_0
                % for bc* plane [90 90 -90], 0 makes b//B_0
                % for ac*/ac plane [0 0 -90], 0 makes c*//B_0
@@ -37,20 +37,19 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 
 
 %%%%%%%%%% Spin parameters %%%%%%%%%%
-Sys.S = 3/2;
-Sys.g = [1.962 1.964 1.979];
-Sys.lwpp = 1.6; % EasySpin uses this in stackplots/spectra
-Sys.DStrain = [100 200]; % sample dependent
-Sys.B2 = [-3*1535 -3*2668 -3*1548 0 0]; % Extended Stevens parameters
+Sys.S = 5/2;
+Sys.g = 2.0043;
+Sys.lwpp = 1.6;
+Sys.B2 = [2091 0 2213 0 0];
 %================================%
 
 
 %%%%%%%%%% Experimental parameters %%%%%%%%%%
-Exp.Temperature = 298;
-Exp.mwFreq = 9.504;
-Exp.Range = [0 1500];
-Exp.CrystalSymmetry = 'C2/m';  % assumes b-axis is yC
-Exp.nPoints = 1e4;
+Exp.Temperature = 300; 
+Exp.mwFreq = 9.4066;
+Exp.Range = [40 1000];
+Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
+Exp.nPoints = 1e5;
 Exp.CrystalOrientation = crystalOri;
 %================================%
 

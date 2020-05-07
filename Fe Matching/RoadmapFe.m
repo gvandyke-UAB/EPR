@@ -2,13 +2,14 @@
 % This script generates roadmap plots and outputs a CSV .txt file with the
 % roadmap data. Rotation comments are for gallium oxide crystal structure.
 
+clear Sys;
+clear Exp;
+clear Opt;
+clf;
 
-clear, clf % clears all variables and figures
-
-%%%%%%%%%%%%%%%%%%%% Fe3+ Roadmap %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ Octahedral %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Fe3+';
-
 startAng = 0; % for a*b plane [90 90 13], 0 makes b//B_0
                % for bc* plane [90 90 -90], 0 makes b//B_0
                % for ac*/ac plane [0 0 -90], 0 makes c*//B_0
@@ -37,14 +38,14 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 Sys.S = 5/2;
 Sys.g = 2.0043;
 Sys.lwpp = 1.6;
-Sys.B2 = [2091 0 2213 0 0];
+Sys.B2 = [-3*2091 0 2213 0 0];
 %================================%
 
 
 %%%%%%%%%% Experimental parameters %%%%%%%%%%
 Exp.Temperature = 300; 
 Exp.mwFreq = 9.4066;
-Exp.Range = [40 1000];
+Exp.Range = [0 840];
 Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
 Exp.nPoints = 1e5;
 Exp.CrystalOrientation = crystalOri;

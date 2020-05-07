@@ -2,14 +2,12 @@
 % This script generates a roadmap with a third axis representing relative
 % intensity. Rotation comments are for gallium oxide crystal structure.
 
-
 clear Sys;
 clear Exp;
 clear Opt;
-clf % clears all variables and figures
+clf;
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ Octahedral %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 center1 = 'Fe3+'; % Name your EPR centers here, used for plot formatting later
@@ -42,14 +40,14 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 Sys.S = 5/2;
 Sys.g = 2.0043;
 Sys.lwpp = 1.6;
-Sys.B2 = [2091 0 2213 0 0];
+Sys.B2 = [-3*2091 0 2213 0 0];
 %================================%
 
 
 %%%%%%%%%% Experimental parameters %%%%%%%%%%
 Exp.Temperature = 300; 
 Exp.mwFreq = 9.4066;
-Exp.Range = [40 1000];
+Exp.Range = [0 840];
 Exp.CrystalSymmetry = 'C2/m';  %assumes 'b' is yC
 Exp.nPoints = 1e5;
 Exp.CrystalOrientation = crystalOri;

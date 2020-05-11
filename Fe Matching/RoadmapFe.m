@@ -38,7 +38,7 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 Sys.S = 5/2;
 Sys.g = 2.0043;
 Sys.lwpp = 1.6;
-Sys.B2 = [-3*2091 0 2213 0 0];
+Sys.B2 = [2091 0 2213 0 0];
 %================================%
 
 

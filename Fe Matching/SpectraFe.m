@@ -10,7 +10,7 @@ clf;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ Octahedral %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Fe3+'; % name your EPR center for plotting
-ang = 15; % for a*b plane [90 90 13], 0 makes b//B_0
+ang = 90; % for a*b plane [90 90 13], 0 makes b//B_0
           % for bc* plane [90 90 -90], 0 makes b//B_0
           % for ac*/ac plane [0 0 -90], 0 makes c*//B_0
 
@@ -37,8 +37,8 @@ crystalOri = rotatecrystal(crystalOriStart,xL,rho);
 Sys.S = 5/2;
 Sys.g = 2.0043;
 Sys.lwpp = 1.6;
-Sys.DStrain = [20 30];
-Sys.B2 = [-3*2091 0 -.3*2213 0 0];
+Sys.B2 = [2091 0 2213 0 0];
+Sys.DStrain = [20 70];
 %================================%
 
 

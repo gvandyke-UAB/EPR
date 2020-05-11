@@ -10,7 +10,7 @@ clf;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fe3+ Octahedral %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 center1 = 'Fe3+'; % name your EPR center for plotting
-ang = 90; % for a*b plane [90 90 13], 0 makes b//B_0
+ang = 0; % for a*b plane [90 90 13], 0 makes b//B_0
           % for bc* plane [90 90 -90], 0 makes b//B_0
           % for ac*/ac plane [0 0 -90], 0 makes c*//B_0
 
